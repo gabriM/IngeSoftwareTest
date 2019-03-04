@@ -2,12 +2,12 @@ import java.io.Serializable;
 
 public class Messaggio implements Serializable{
 	//Attributi
-		private Utente destinatario;
+		private String destinatario;
 		private String testo;
 		
 		
 		//Costruttori
-		public Messaggio(Utente _destinatario, String _testo){
+		public Messaggio(String _destinatario, String _testo){
 			destinatario =_destinatario;
 			testo= _testo;
 			
@@ -17,7 +17,7 @@ public class Messaggio implements Serializable{
 		
 		
 		// Getters and Setters generati automaticamente
-		public Utente getDestinatario() {
+		public String getDestinatario() {
 			return destinatario;
 		}
 
@@ -27,7 +27,7 @@ public class Messaggio implements Serializable{
 		}
 
 
-		public void setDestinatario(Utente destinatario) {
+		public void setDestinatario(String destinatario) {
 			this.destinatario = destinatario;
 		}
 

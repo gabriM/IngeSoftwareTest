@@ -1,14 +1,16 @@
+import java.io.Serializable;
+
 import MyLib.Utility;
 
-public class Iscrizioni {
+public class Iscrizioni implements Serializable{
 	
-	public Utente utente;
+	public String utente;
 	public Evento evento;
 	public int costo;
 	
 	
 	
-	public Iscrizioni (Utente _utente, Evento _evento){
+	public Iscrizioni (String _utente, Evento _evento){
 		utente=_utente;
 		evento=_evento;
 		costo=(int) evento.getCategoria().getQuotaIndividuale().getValore().getValore();
@@ -17,7 +19,7 @@ public class Iscrizioni {
 
 	
 	
-	public Utente getUtente() {
+	public String getUtente() {
 		return utente;
 	}
 
@@ -35,7 +37,7 @@ public class Iscrizioni {
 
 
 
-	public void setUtente(Utente utente) {
+	public void setUtente(String utente) {
 		this.utente = utente;
 	}
 

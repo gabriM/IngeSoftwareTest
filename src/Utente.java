@@ -35,6 +35,17 @@ public class Utente implements Serializable{
 		}
 		
 		
+		
+		public Boolean confrontaUtenteStringa(String uConfronto){
+			Boolean uguale;
+			if(nomeUtente.equalsIgnoreCase(uConfronto))
+				uguale=true;
+			else
+				uguale=false;
+			
+			return uguale;
+		}
+		
 		public void inserisciDatiPersonali(ArrayList<Categoria> elencoCategorie){
 			int inserimento= Utility.leggiIntero(0,1, "Vuoi modificare l'elenco delle tue categorie preferite? Digita 1 per SI e 0 pre NO");
 			
@@ -44,7 +55,7 @@ public class Utente implements Serializable{
 			else{
 				ArrayList<Categoria> nuoveCategorie= new ArrayList<>();
 				ArrayList<Categoria> sceltaCategorie= new ArrayList<>();
-				sceltaCategorie=elencoCategorie;
+				sceltaCategorie= (ArrayList<Categoria>) elencoCategorie.clone();
 				int numCat=0;
 				do{
 					System.out.println("0) Esci");

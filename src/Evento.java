@@ -86,7 +86,7 @@ public class Evento implements Serializable{
 		Boolean iscritto= false;
 		
 		for(int i=0; i< elencoIscritti.size(); i++){
-			if (utente.confrontaUtente(elencoIscritti.get(i).getUtente())){
+			if (utente.confrontaUtenteStringa(elencoIscritti.get(i).getUtente())){
 				iscritto= true;
 			}
 		}
@@ -147,7 +147,7 @@ public class Evento implements Serializable{
 					stato= "Chiusa";
 					for (int i=0;i< elencoIscritti.size();i++){
 						
-						Utente nomeUtente= elencoIscritti.get(i).getUtente();
+						String nomeUtente= elencoIscritti.get(i).getUtente();
 						String testo= TESTOCHIUSURA[0] +categoria.getTitolo().getValore().getValore() + TESTOCHIUSURA[1] + dateFormat.format(categoria.getData().getValore().getValore())+ TESTOCHIUSURA[2] + categoria.getOra().getValore().getValore()+ TESTOCHIUSURA[3] + categoria.getLuogo().getValore().getValore() +TESTOCHIUSURA[4] + elencoIscritti.get(i).getCosto()+ TESTOCHIUSURA[5];                               	
 						Messaggio msg =new Messaggio(nomeUtente,testo);
 						
@@ -162,7 +162,7 @@ public class Evento implements Serializable{
 				stato= "Chiusa";
 				for (int i=0;i< elencoIscritti.size();i++){
 					
-					Utente nomeUtente= elencoIscritti.get(i).getUtente();
+					String nomeUtente= elencoIscritti.get(i).getUtente();
 					String testo= TESTOCHIUSURA[0] +categoria.getTitolo().getValore().getValore() + TESTOCHIUSURA[1] + dateFormat.format(categoria.getData().getValore().getValore())+ TESTOCHIUSURA[2] + categoria.getOra().getValore().getValore()+ TESTOCHIUSURA[3] + categoria.getLuogo().getValore().getValore() +TESTOCHIUSURA[4] + elencoIscritti.get(i).getCosto()+ TESTOCHIUSURA[5];                               	
 					Messaggio msg =new Messaggio(nomeUtente,testo);
 					
@@ -211,7 +211,7 @@ public class Evento implements Serializable{
 				stato="Fallita";
 				
 				for (int i=0;i< elencoIscritti.size();i++){
-					Utente nomeUtente= elencoIscritti.get(i).getUtente();
+					String nomeUtente= elencoIscritti.get(i).getUtente();
 					String testo= TESTOFALLITO[0] +categoria.getTitolo().getValore().getValore() + TESTOFALLITO[1]; 
 					Messaggio msg =new Messaggio(nomeUtente,testo);
 					messaggiStato.add(msg);
@@ -222,7 +222,7 @@ public class Evento implements Serializable{
 				
 				for (int i=0;i< elencoIscritti.size();i++) {
 
-					Utente nomeUtente = elencoIscritti.get(i).getUtente();
+					String nomeUtente = elencoIscritti.get(i).getUtente();
 					String testo = TESTOCHIUSURA[0] + categoria.getTitolo().getValore().getValore() + TESTOCHIUSURA[1] + dateFormat.format(categoria.getData().getValore().getValore()) + TESTOCHIUSURA[2] + categoria.getOra().getValore().getValore() + TESTOCHIUSURA[3] + categoria.getLuogo().getValore().getValore() + TESTOCHIUSURA[4] + elencoIscritti.get(i).getCosto() + TESTOCHIUSURA[5];
 					Messaggio msg = new Messaggio(nomeUtente, testo);
 
@@ -240,7 +240,7 @@ public class Evento implements Serializable{
 		ArrayList<Messaggio> messaggiStato = new ArrayList<>();
 		if(stato.equalsIgnoreCase("Annullato")){
 			for (int i=0;i< elencoIscritti.size();i++){
-				Utente nomeUtente= elencoIscritti.get(i).getUtente();
+				String nomeUtente= elencoIscritti.get(i).getUtente();
 				String testo= TESTOANNULLATO[0] +categoria.getTitolo().getValore().getValore() + TESTOANNULLATO[1];
 				Messaggio msg =new Messaggio(nomeUtente,testo);
 				messaggiStato.add(msg);
