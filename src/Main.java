@@ -78,7 +78,7 @@ public class Main {
 		if(ServizioFile.esistenzaFile(fileutenti) == 0) {
 			ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
 		}else
-			elencoUtenti=  (ArrayList<Utente>) ServizioFile.caricaSingoloOggetto(fileutenti);
+			//elencoUtenti=  (ArrayList<Utente>) ServizioFile.caricaSingoloOggetto(fileutenti);
 
 		if(ServizioFile.esistenzaFile(filebacheca) == 0) {
 			ServizioFile.salvaSingoloOggetto(filebacheca, bacheca);
@@ -178,14 +178,15 @@ public class Main {
 					case 1:
 						Evento eventoP= new Evento(partita,elencoUtenti.get(numUtente));
 						eventoP.inserisciDettagliEvento();
-						eventoP.getElencoIscritti().add(elencoUtenti.get(numUtente));
+						Iscrizioni iscrizioneP=new Iscrizioni(elencoUtenti.get(numUtente),eventoP);
+						eventoP.getElencoIscritti().add(iscrizioneP);
 						elencoUtenti.get(numUtente).getEventiUtente().add(eventoP);
 						break;
 					case 2:
 						Evento eventoG= new Evento(gita,elencoUtenti.get(numUtente));
 						eventoG.inserisciDettagliEvento();
-						eventoG.getElencoIscritti().add(elencoUtenti.get(numUtente));
-						elencoUtenti.get(numUtente).getEventiUtente().add(eventoG);
+						Iscrizioni iscrizioneG=new Iscrizioni(elencoUtenti.get(numUtente),eventoG);
+						eventoG.getElencoIscritti().add(iscrizioneG);
 						break;
 				}
 				
@@ -358,7 +359,10 @@ public class Main {
 					int numIscEvento=Utility.leggiIntero(0, bacheca.getElencoEventi().size() +1, SCELTAISCEVENTO);
 					
 					if (numIscEvento!=0){
-						bacheca.getElencoEventi().get(numIscEvento-1).getElencoIscritti().add(elencoUtenti.get(numUtente));
+						Iscrizioni iscrizione=new Iscrizioni(elencoUtenti.get(numUtente),bacheca.getElencoEventi().get(numIscEvento-1));
+						int costo=bacheca.getElencoEventi().get(numIscEvento-1).sceltaOpzioniGita();
+						iscrizione.setCosto(costo);
+						bacheca.getElencoEventi().get(numIscEvento-1).getElencoIscritti().add(iscrizione);
 						String nomeCreatore=bacheca.getElencoEventi().get(numIscEvento-1).getCreatore().getNomeUtente();
 						for(int i=0; i<elencoUtenti.size();i++){
 							if (elencoUtenti.get(i).getNomeUtente().equalsIgnoreCase(nomeCreatore)){
@@ -540,7 +544,7 @@ public class Main {
 							for(int i=0; i<elencoUtenti.get(numUtente).getUtentiamici().size();i++){
 								boolean giaIscrittoEv=false;
 								for (int j=0; j<bacheca.getElencoEventi().get(numInvitoEvento-1).getElencoIscritti().size();j++){
-									if(elencoUtenti.get(numUtente).getUtentiamici().get(i).confrontaUtente(bacheca.getElencoEventi().get(numInvitoEvento-1).getElencoIscritti().get(j))){
+									if(elencoUtenti.get(numUtente).getUtentiamici().get(i).confrontaUtente(bacheca.getElencoEventi().get(numInvitoEvento-1).getElencoIscritti().get(j).getUtente())){
 											giaIscrittoEv=true;
 									}
 								}
@@ -605,7 +609,8 @@ public class Main {
 					eventopredef.inserisciValoriPredefinitiEvento();
 					
 					
-					eventopredef.getElencoIscritti().add(elencoUtenti.get(numUtente));
+					Iscrizioni iscrizionepredef=new Iscrizioni(elencoUtenti.get(numUtente),eventopredef);
+					eventopredef.getElencoIscritti().add(iscrizionepredef);
 					elencoUtenti.get(numUtente).getEventiUtente().add(eventopredef);
 					System.out.println(MSGEVENTO);
 					

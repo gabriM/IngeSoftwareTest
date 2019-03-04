@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import MyLib.Utility;
+
 public class Gita extends Categoria {
 	private Campo costoPasti=new Campo("Costo pasti","Indica il costo se si vuole usufruire dei pasti forniti dall'organizzazione",true,INT);
 	private Campo mezzoTrasporto=new Campo("Mezzo di trasporto","Indica il mezzo di trasporto con cui si raggiungerà il luogo di destinazione",true,STRING);
@@ -50,7 +52,29 @@ public class Gita extends Categoria {
 			}
 		}
 
-
+	
+	 
+	 public int sceltaOpzioni() {
+			int costo=(int) getQuotaIndividuale().getValore().getValore();
+			int inserimento1= Utility.leggiIntero(0,1, "Vuoi usufruire dei pasti forniti dall'organizzazione? (Costo "+ (int) costoPasti.getValore().getValore() +" Euro) Digita 1 per SI e 0 pre NO");
+			if(inserimento1==0){
+			
+			}
+			else{
+				costo=costo + (int) costoPasti.getValore().getValore();
+			}
+			
+			
+			int inserimento2= Utility.leggiIntero(0,1, "Vuoi usufruire del trasporto fornito dall'organizzazione? (Costo "+ (int) costoTrasporto.getValore().getValore() +" Euro) Digita 1 per SI e 0 pre NO");
+			if(inserimento2==0){
+				
+			}
+			else{
+				costo=costo + (int) costoTrasporto.getValore().getValore();
+			}
+			return costo;
+		} 
+	 
 	public Campo getCostoPasti() {
 		return costoPasti;
 	}

@@ -103,6 +103,12 @@ public class Categoria implements Serializable{
 		
 	}
 	
+	public int sceltaOpzioni() {
+			
+			return (int) quotaIndividuale.getValore().getValore();
+		}
+		
+	
 	// Getters and Setters generati automaticamente
 	public String getNome() {
 		return nome;
@@ -264,4 +270,6 @@ public class Categoria implements Serializable{
     public void setDataRitiroIscrizione(Campo dataRitiroIscrizione) {
         this.dataRitiroIscrizione = dataRitiroIscrizione;
     }
+
+	
 }
