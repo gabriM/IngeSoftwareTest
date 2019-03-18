@@ -25,8 +25,8 @@ import java.util.Scanner;
 public class Utility 
 {
 	
-	private final static String MSGERRORE="Il valore con cui evochi questa funzione non è accettabile";
-	private final static String ERROREFORMATO="Il valore inserito non è del tipo richiesto";
+	private final static String MSGERRORE="Il valore con cui evochi questa funzione non ï¿½ accettabile";
+	private final static String ERROREFORMATO="Il valore inserito non ï¿½ del tipo richiesto";
 	private final static String MSG_NO_FILE = "ATTENZIONE: NON TROVO IL FILE ";
 	private final static String MSG_NO_LETTURA = "ATTENZIONE: PROBLEMI CON LA LETTURA DEL FILE ";
 	private final static String MSG_NO_SCRITTURA = "ATTENZIONE: PROBLEMI CON LA SCRITTURA DEL FILE ";
@@ -45,7 +45,7 @@ public class Utility
 		return nome;
 	}
 	
-	public static ArrayList<Integer> leggiFaciaEtà(String msg)
+	public static ArrayList<Integer> leggiFasciaEta(String msg)
 	{
 		ArrayList<Integer> eta=new ArrayList<>();
 		int eta1=Utility.leggiIntero(1, 110, "Inserisci estremo inferiore");

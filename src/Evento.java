@@ -6,38 +6,152 @@ import java.util.Date;
 
 import MyLib.Utility;
 
+/**
+ * Classe che definisce un <i>Evento</i>.
+ *
+ * Un evento contiene le seguenti caratteristiche:
+ * categoria;
+ * validità;
+ * creatore;
+ * elenco utenti iscritti;
+ * stato.
+ *
+ * @author Matteo Gusmini
+ *
+ * @version 4.0 1 Febbraio 2019
+ *
+ */
 public class Evento implements Serializable{
-	
-	
-	
+
+	/*Costanti*/
 	final String[] TESTOCHIUSURA={"L'evento "," ha raggiunto un numero sufficiente di iscrizioni e si terra dunque in data "," alle ore "," presso ",". Si ricorda che � necessatrio versare la quota di iscrizione di "," Euro."};
 	final String[] TESTOFALLITO={"L'evento "," NON ha raggiunto un numero sufficiente di iscrizioni ed � quindi stato cancellato."};
 	final String[] TESTOANNULLATO={"L'evento "," E' stato cancellato dall'organizzatore."};
-	
-	
-	//Attributi
+
+
+	/*Attributi*/
 	private Categoria categoria;
 	private Boolean validita;
 	private Utente creatore;
 	private ArrayList <Iscrizioni> elencoIscritti = new ArrayList<>();
 	private String stato;
 
-	
-	
-	//Costruttori
+	/*Costruttori*/
+	/**
+	 * Una evento e' costituito da categoria, validità, creatore, elenco utenti e stato.
+	 *
+	 * @param _categoria categoria dell'evento
+	 * @param _creatore creatore dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public Evento(Categoria _categoria, Utente _creatore){
 		categoria= _categoria;
 		creatore=_creatore;
 		validita = false;
 		stato= "Aperta";
 	}
-	
-	
-	
-	//Metodi
-	
-	
-	//Metodo che verifica che tutti i campi obbligatori abbiano inserito un valore
+
+	/*Getters*/
+	/**
+	 * Ritorna la categoria dell'evento
+	 * @return categoria dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	/**
+	 * Ritorna la validità dell'evento
+	 * @return validita dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public Boolean getvalidita() {
+		return validita;
+	}
+	/**
+	 * Ritorna il creatore dell'evento
+	 * @return creatore dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public Utente getCreatore() {
+		return creatore;
+	}
+	/**
+	 * Ritorna un ArrayList degli utenti iscritti all'evento
+	 * @return ArrayList degli utenti iscritti all'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public ArrayList<Iscrizioni> getElencoIscritti() {
+		return elencoIscritti;
+	}
+	/**
+	 * Ritorna lo stato dell'evento
+	 * @return lo stato dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public String getStato() {
+		return stato;
+	}
+
+	/*Setters*/
+	/**
+	 * Metodo che imposta la categoria dell'evento
+	 * @param categoria dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	/**
+	 * Metodo che imposta la validità dell'evento
+	 * @param validita validità dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public void setvalidita(Boolean validita) {
+		this.validita = validita;
+	}
+	/**
+	 * Metodo che imposta il creatore dell'evento
+	 * @param creatore il creatore dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public void setCreatore(Utente creatore) {
+		this.creatore = creatore;
+	}
+	/**
+	 * Permette di cambiare l'elenco degli iscritti
+	 * @param elencoIscritti il nuovo elenco
+	 *
+	 */
+	public void setElencoIscritti(ArrayList<Iscrizioni> elencoIscritti) {
+		this.elencoIscritti = elencoIscritti;
+	}
+	/**
+	 * Metodo che imposta lo stato dell'evento
+	 * @param stato lo stato dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public void setStato(String stato) {
+		this.stato = stato;
+	}
+
+
+	/*Metodi*/
+	/**
+	 * Verifica che tutti i campi obbligatori abbiano inserito un valore
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public void isValido(){
 		validita=true;
 		
@@ -48,15 +162,19 @@ public class Evento implements Serializable{
 		}
 		
 	}
-	
-	
-	// Metodo che permette di inserire i valori a campi dell'evento
+	/**
+	 * Assegna i valori a campi dell'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public void inserisciDettagliEvento()throws Exception{
 		categoria.inserisciCampi();
 	}
-	
-	
-	// Metodo che genera un evento standard per velocizzare la fase di testing
+	/**
+	 * Genera un evento standard per velocizzare la fase di testing
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public void inserisciValoriPredefinitiEvento()throws Exception{
 		Date termineIsc=new Date("10/07/2019");
 		Date dataEV=new Date("10/08/2019");
@@ -80,8 +198,14 @@ public class Evento implements Serializable{
 		categoria.inserisciValoriPredefiniti();
 		
 	}
-	
-	// Metodo che controlla se un utente � gi� iscritto ad un evento
+	/**
+	 * Metodo che, dato il nome di un utente, permette di sapere se questo utente è già iscritto ad un evento
+	 *
+	 * @param utente il nome dell'utente
+	 * @return true se l'utente è presente nell'elenco di utenti iscritti all'evento, false altrimenti
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public Boolean giaIscritto(Utente utente) {
 		Boolean iscritto= false;
 		
@@ -94,9 +218,13 @@ public class Evento implements Serializable{
 		
 		return iscritto;
 	}
-	
-	
-	// Controlla che le date siano inserite in maniera coerente con il loro significato
+	/**
+	 * Metodo che, controlla che le date siano inserite in maniera coerente con il loro significato
+	 *
+	 * @return true se le date inserite sono coerenti con il loro significato, false altrimenti
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public Boolean controlloDate() {
 		Boolean valido = true;
 		Date termIsc= (Date) categoria.getTermineIscrizione().getValore().getValore();
@@ -132,8 +260,16 @@ public class Evento implements Serializable{
 				
 		return valido;
 	}
-	
-	// Metodo che controlla se il numero di partecipanti di un evento ha raggiunto il limite e se � vero genere i messaggi
+	/**
+	 * Controlla se il numero di partecipanti di un evento ha raggiunto il limite e se è vero imposta lo stato evento come "Chiuso" e
+	 * genera i messaggi (Restituisce un ArrayList di Messaggio) contenenti informazioni relative allo stato dell'evento e li manda
+	 * a tutti gli utenti iscritti all'evento
+	 *
+	 * @return <strong>un elenco di messaggi</strong> contenenti informazioni relative allo stato dell'evento che vengono mandati a
+	 * tutti gli iscritti all'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public ArrayList<Messaggio> controlloNPartecipanti(){
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
@@ -176,19 +312,26 @@ public class Evento implements Serializable{
 		return messaggiStato;
 		
 	}
-
-
-	// Metodo che controlla se si � superata la data di termine iscrizione o quella di svolgimento dell'evento
+	/**
+	 * Controlla se è stata superata la data di termine iscrizione o quella di svolgimento dell'evento e se i posti disponibili sono esauriti: se è vero imposta
+	 * lo stato evento come "Concluso", altrimenti se è stata superata la data di termine iscrizione o quella di svolgimento dell'evento ma non si è raggiunto
+	 * il numero minimo di partecipanti, lo stato dell'evento viene impostato come "Fallito" e genera i messaggi (Restituisce un ArrayList di Messaggio) contenenti
+	 * informazioni relative allo stato dell'evento e li manda a tutti gli utenti iscritti all'evento.
+	 *
+	 * @return <strong>un elenco di messaggi</strong> contenenti informazioni relative allo stato dell'evento che vengono mandati a tutti gli iscritti all'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public ArrayList<Messaggio> controlloData(){
-		
-		// Data odierna per effettuare il confronto
+
+		/*Data odierna per effettuare il confronto*/
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
 		
 		
 		ArrayList<Messaggio> messaggiStato = new ArrayList<>();
-		
-		// Verifica se � stata passata la data conclusiva dell'evento (nel caso sia inserita)o la data dell'evento
+
+		/*Verifica se è stata passata la data conclusiva dell'evento (nel caso sia inserita)o la data dell'evento*/
 		if(categoria.getDataFine().getValore().getInserito()){
 			if( ((Date) categoria.getDataFine().getValore().getValore()).before(date)){
 				if (getPostiLiberi()==0){
@@ -203,9 +346,9 @@ public class Evento implements Serializable{
 				}
 			}
 		}
-		
-		// Controla se � stata superata la data di termine delle iscrizioni senza aver raggiunto il numero minimo di iscritti
-		// Genera dei messaggi in caso affermativo
+
+		/*Controlla se è stata superata la data di termine delle iscrizioni senza aver raggiunto il numero minimo di iscritti*/
+		/*Genera dei messaggi in caso affermativo*/
 		if( ((Date) categoria.getTermineIscrizione().getValore().getValore()).before(date)){
 			if (getPostiMinimiPartecipanti()> 0){
 				stato="Fallita";
@@ -234,8 +377,14 @@ public class Evento implements Serializable{
 		
 		return messaggiStato;
 	}
-	
-	// Manda messaggi per eventi cancellati
+	/**
+	 * Controlla se l'evento è stato cancellato dal creatore evento e genera i messaggi (Restituisce un ArrayList di Messaggio) contenenti
+	 * informazioni relative allo stato dell'evento e li manda a tutti gli utenti iscritti all'evento.
+	 *
+	 * @return <strong>un elenco di messaggi</strong> contenenti informazioni relative allo stato dell'evento che vengono mandati a tutti gli iscritti all'evento
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public ArrayList<Messaggio> controlloEventoCancellato(){
 		ArrayList<Messaggio> messaggiStato = new ArrayList<>();
 		if(stato.equalsIgnoreCase("Annullato")){
@@ -249,8 +398,13 @@ public class Evento implements Serializable{
 		}
 		return messaggiStato;
 	}
-
-
+	/**
+	 * Metodo che controlla che la data odierna sia precedente o uguale alla data di ritiro Iscrizione
+	 *
+	 * @return true se la data odierna è precedente o uguale alla data di ritiro Iscrizione, false altrimenti
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public boolean controlloDataEliminazione(){
 		Boolean valido= true;
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -266,88 +420,33 @@ public class Evento implements Serializable{
 		return valido;
 
 	}
-	
-	// Metodo che ritorna il numero di posti liberi di un evento
-	public int getPostiMinimiPartecipanti(){
+	/**
+	 * Ritorna il numero di posti liberi di un evento senza tenere conto dei posti in esubero
+	 * @return il numero di posti liberi di un evento senza tenere conto dei posti in esubero
+	 *
+	 * @author Matteo Gusmini
+	 */
+	public int getPostiMinimiPartecipanti()
+	{
 			return categoria.getPartecipantiMin() - elencoIscritti.size();
 	}
-
+	/**
+	 * Ritorna il numero di posti liberi di un evento
+	 * @return il numero di posti liberi di un evento
+	 *
+	 * @author Matteo Gusmini
+	 */
 	public int getPostiLiberi(){
 		
 		return categoria.getPartecipantiMax() - elencoIscritti.size();
 	}
-	
-	
-	
+	/**
+	 * Ritorna l'ammontare della quota individuale di partecipazione all'evento
+	 * @return costo l'ammontare della quota individuale di partecipazione all'evento
+	 */
 	public int sceltaOpzioniGita() {
 		int costo=categoria.sceltaOpzioni();
 		return costo;
 	}
-	
-
-	// Getters and Setters generati automaticamente
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	
-
-	public Boolean getvalidita() {
-		return validita;
-	}
-
-
-
-
-	public Utente getCreatore() {
-		return creatore;
-	}
-
-
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-
-
-
-	public void setvalidita(Boolean validita) {
-		this.validita = validita;
-	}
-	
-
-
-	public void setCreatore(Utente creatore) {
-		this.creatore = creatore;
-	}
-
-
-
-	public ArrayList<Iscrizioni> getElencoIscritti() {
-		return elencoIscritti;
-	}
-
-
-
-	public void setElencoIscritti(ArrayList<Iscrizioni> elencoIscritti) {
-		this.elencoIscritti = elencoIscritti;
-	}
-
-
-
-	public String getStato() {
-		return stato;
-	}
-
-
-
-	public void setStato(String stato) {
-		this.stato = stato;
-	}
-	
-	
-	
-	
-	
 
 }
