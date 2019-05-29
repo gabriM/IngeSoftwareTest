@@ -1,6 +1,9 @@
 package Test;
 
 import static org.junit.Assert.*;
+
+import java.util.Date;
+
 import Codice.*;
 import org.junit.Test;
 
@@ -67,5 +70,181 @@ public class EventoTest {
 	boolean validita = e.getvalidita();
 	assertFalse(validita);
 	}
+	
+	
+	@Test
+	public void testGiaIscrittoTrue()
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	Utente iscritto = new Utente("Rosso");
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	boolean isc = e.giaIscritto(iscritto);
+	assertTrue(isc);
+	}
+	
+	@Test
+	public void testGiaIscrittoFalse()
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	Utente iscritto = new Utente("Rosso");
+	Iscrizioni i1= new Iscrizioni("Giallo",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	boolean isc = e.giaIscritto(iscritto);
+	assertFalse(isc);
+	}
+	
+	@Test
+	public void ControlloDateTrueAllInsert()
+	{
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/08/2019");
+	Date dataFine=new Date("10/09/2019");
+	Date dataRitiroIsc=new Date("10/06/2019");
+		
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getDataFine().getValore().setValore(dataFine);
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	boolean controllo= e.controlloDate();
+	assertTrue(controllo);
+	}
+	
+	@Test
+	public void ControlloDateTrueDFineNotInsert()
+	{
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/08/2019");
+	Date dataRitiroIsc=new Date("10/06/2019");
+		
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	boolean controllo= e.controlloDate();
+	assertTrue(controllo);
+	}
+	
+	@Test
+	public void ControlloDateTrueDRitiroNotInsert()
+	{
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/08/2019");
+	Date dataFine=new Date("10/09/2019");
+		
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getDataFine().getValore().setValore(dataFine);
+	
+	boolean controllo= e.controlloDate();
+	assertTrue(controllo);
+	}
+	
+	@Test
+	public void ControlloDateFalseAllInsertDEv()
+	{
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/06/2019");
+	Date dataFine=new Date("10/09/2019");
+	Date dataRitiroIsc=new Date("10/06/2019");
+		
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getDataFine().getValore().setValore(dataFine);
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	boolean controllo= e.controlloDate();
+	assertFalse(controllo);
+	}
+	@Test
+	public void ControlloDateFalseAllInsertDRit()
+	{
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/08/2019");
+	Date dataFine=new Date("10/09/2019");
+	Date dataRitiroIsc=new Date("10/09/2019");
+		
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getDataFine().getValore().setValore(dataFine);
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	boolean controllo= e.controlloDate();
+	assertFalse(controllo);
+	}
+	@Test
+	public void ControlloDateFalseNotAllInsertDEv()
+	{
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/06/2019");
+	Date dataRitiroIsc=new Date("10/06/2019");
+		
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	boolean controllo= e.controlloDate();
+	assertFalse(controllo);
+	}
+	
+	@Test
+	public void ControlloDateFalseNotAllInsertDFine()
+	{
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/08/2019");
+	Date dataFine=new Date("10/06/2019");
+		
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getDataFine().getValore().setValore(dataFine);
+	
+	boolean controllo= e.controlloDate();
+	assertFalse(controllo);
+	}
+	
+	
+	
+	
+	
+	
 	
 }
