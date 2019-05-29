@@ -2,6 +2,9 @@ package Test;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import Codice.*;
@@ -241,6 +244,38 @@ public class EventoTest {
 	assertFalse(controllo);
 	}
 	
+	@Test
+	public void testNPartecipantiFullDRitInsPassata() 
+	{
+	Date dataRitiroIsc=new Date("01/01/2019");
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/08/2019");
+	
+	
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	e.getCategoria().getnPartecipanti().getValore().setValore(2);	
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	e.getCategoria().getTitolo().getValore().setValore("Titolo");
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);;
+	e.getCategoria().getLuogo().getValore().setValore("Brescia");
+	e.getCategoria().getData().getValore().setValore("dataEv");
+	e.getCategoria().getOra().getValore().setValore("10:10");
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	i1.setCosto(10);
+	i2.setCosto(10);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i1);
+	
+	e.controlloNPartecipanti();
+	
+	String stato = e.getStato();
+	assertEquals(stato,"Chiusa");
+	}
 	
 	
 	
