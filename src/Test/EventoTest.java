@@ -2,13 +2,20 @@ package Test;
 
 import static org.junit.Assert.*;
 
+import Codice.Utente;
 import org.junit.Test;
 
 public class EventoTest {
-// sffwoegnwri
+
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testValidita()
+	{
+	Partita p = new Categoria();
+	Utente u = new Utente(Prova);
+	Evento e = new Evento(p,u);
+
+	boolean validita = e.isValido;
+	assertFalse(validita);
 	}
 
 }
