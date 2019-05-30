@@ -332,23 +332,6 @@ public class Evento implements Serializable{
 		
 		
 		ArrayList<Messaggio> messaggiStato = new ArrayList<>();
-
-		/*Verifica se è stata passata la data conclusiva dell'evento (nel caso sia inserita)o la data dell'evento*/
-		if(categoria.getDataFine().getValore().getInserito()){
-			if( ((Date) categoria.getDataFine().getValore().getValore()).before(date)){
-				if (getPostiLiberi()==0){
-					stato= "Conclusa";
-				}
-			}
-		}
-		else{
-			if( ((Date) categoria.getData().getValore().getValore()).before(date)){
-				if (getPostiLiberi()==0){
-					stato= "Conclusa";
-				}
-			}
-		}
-
 		/*Controlla se è stata superata la data di termine delle iscrizioni senza aver raggiunto il numero minimo di iscritti*/
 		/*Genera dei messaggi in caso affermativo*/
 		if( ((Date) categoria.getTermineIscrizione().getValore().getValore()).before(date)){
@@ -375,6 +358,20 @@ public class Evento implements Serializable{
 				}
 			}
 		}
+
+		/*Verifica se è stata passata la data conclusiva dell'evento (nel caso sia inserita)o la data dell'evento*/
+		if(categoria.getDataFine().getValore().getInserito()){
+			if( ((Date) categoria.getDataFine().getValore().getValore()).before(date)){	
+					stato= "Conclusa";
+			}
+		}
+		else{
+			if( ((Date) categoria.getData().getValore().getValore()).before(date)){
+					stato= "Conclusa";
+			}
+		}
+
+	
 		
 		
 		return messaggiStato;
@@ -408,17 +405,18 @@ public class Evento implements Serializable{
 	 * @author Matteo Gusmini
 	 */
 	public boolean controlloDataEliminazione(){
-		Boolean valido= true;
+		Boolean valido= false;
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
-		Date ultimaIscr = (Date) categoria.getDataRitiroIscrizione().getValore().getValore();
+		if(categoria.getDataRitiroIscrizione().getValore().getInserito()){
+			Date ultimaIscr = (Date) categoria.getDataRitiroIscrizione().getValore().getValore();
 
-		if(date.before(ultimaIscr) || date.equals(ultimaIscr)){
-			valido = true;
-		}else {
-			valido = false;
+			if(date.before(ultimaIscr) || date.equals(ultimaIscr)){
+				valido = true;
+			}else {
+				valido = false;
+			}
 		}
-
 		return valido;
 
 	}

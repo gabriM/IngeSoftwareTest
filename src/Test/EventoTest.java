@@ -259,9 +259,9 @@ public class EventoTest {
 	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
 	
 	e.getCategoria().getTitolo().getValore().setValore("Titolo");
-	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);;
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
 	e.getCategoria().getLuogo().getValore().setValore("Brescia");
-	e.getCategoria().getData().getValore().setValore("dataEv");
+	e.getCategoria().getData().getValore().setValore(dataEV);
 	e.getCategoria().getOra().getValore().setValore("10:10");
 	Iscrizioni i1= new Iscrizioni("Rosso",e);
 	Iscrizioni i2= new Iscrizioni("Verde",e);
@@ -269,7 +269,7 @@ public class EventoTest {
 	i2.setCosto(10);
 	
 	e.getElencoIscritti().add(i1);
-	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
 	
 	e.controlloNPartecipanti();
 	
@@ -277,9 +277,378 @@ public class EventoTest {
 	assertEquals(stato,"Chiusa");
 	}
 	
+	@Test
+	public void testNPartecipantiFullDRitInsFutura() 
+	{
+	Date dataRitiroIsc=new Date("12/12/2019");
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/08/2019");
+	
+	
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	e.getCategoria().getnPartecipanti().getValore().setValore(2);	
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	e.getCategoria().getTitolo().getValore().setValore("Titolo");
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getLuogo().getValore().setValore("Brescia");
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getOra().getValore().setValore("10:10");
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	i1.setCosto(10);
+	i2.setCosto(10);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	e.controlloNPartecipanti();
+	
+	String stato = e.getStato();
+	assertEquals(stato,"Aperta");
+	}
+
+	
+	@Test
+	public void testNPartecipantiNotFullDRitInsPassata() 
+	{
+	Date dataRitiroIsc=new Date("01/01/2019");
+	Date termineIsc=new Date("10/07/2019");
+	Date dataEV=new Date("10/08/2019");
+	
+	
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	e.getCategoria().getnPartecipanti().getValore().setValore(3);	
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	e.getCategoria().getTitolo().getValore().setValore("Titolo");
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getLuogo().getValore().setValore("Brescia");
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getOra().getValore().setValore("10:10");
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	i1.setCosto(10);
+	i2.setCosto(10);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	e.controlloNPartecipanti();
+	
+	String stato = e.getStato();
+	assertEquals(stato,"Aperta");
+	}
 	
 	
 	
+	@Test
+	public void testControlloDataDFineEvPassata() 
+	{
+	Date dataRitiroIsc=new Date("01/01/2019");
+	Date termineIsc=new Date("02/02/2019");
+	Date dataEV=new Date("03/03/2019");
+	Date dataFine=new Date("04/04/2019");
+	
+	
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	e.getCategoria().getnPartecipanti().getValore().setValore(3);	
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	e.getCategoria().getDataFine().getValore().setValore(dataFine);
+	e.getCategoria().getTitolo().getValore().setValore("Titolo");
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getLuogo().getValore().setValore("Brescia");
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getOra().getValore().setValore("10:10");
+	
+	e.controlloData();
+	
+	String stato = e.getStato();
+	assertEquals(stato,"Conclusa");
+	}
+	
+	@Test
+	public void testControlloDataEvPass() 
+	{
+	Date dataRitiroIsc=new Date("01/01/2019");
+	Date termineIsc=new Date("02/02/2019");
+	Date dataEV=new Date("03/03/2019");
+
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	e.getCategoria().getnPartecipanti().getValore().setValore(3);	
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	e.getCategoria().getTitolo().getValore().setValore("Titolo");
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getLuogo().getValore().setValore("Brescia");
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getOra().getValore().setValore("10:10");
+	
+	e.controlloData();
+	
+	String stato = e.getStato();
+	assertEquals(stato,"Conclusa");
+	}
+	
+	@Test
+	public void testControlloDataNIscSuff() 
+	{
+	Date dataRitiroIsc=new Date("01/01/2019");
+	Date termineIsc=new Date("02/02/2019");
+	Date dataEV=new Date("03/03/2020");
+	Date dataFine=new Date("04/04/2020");
+	
+	
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	e.getCategoria().getnPartecipanti().getValore().setValore(2);	
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	e.getCategoria().getDataFine().getValore().setValore(dataFine);
+	e.getCategoria().getTitolo().getValore().setValore("Titolo");
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getLuogo().getValore().setValore("Brescia");
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getOra().getValore().setValore("10:10");
+	
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	i1.setCosto(10);
+	i2.setCosto(10);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	e.controlloData();
+	
+	String stato = e.getStato();
+	assertEquals(stato,"Chiusa2");
+	}
+	
+	
+	@Test
+	public void testControlloDataNIscNotSuff() 
+	{
+	Date dataRitiroIsc=new Date("01/01/2019");
+	Date termineIsc=new Date("02/02/2019");
+	Date dataEV=new Date("03/03/2020");
+	Date dataFine=new Date("04/04/2020");
+	
+	
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	e.getCategoria().getnPartecipanti().getValore().setValore(4);	
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	e.getCategoria().getDataFine().getValore().setValore(dataFine);
+	e.getCategoria().getTitolo().getValore().setValore("Titolo");
+	e.getCategoria().getTermineIscrizione().getValore().setValore(termineIsc);
+	e.getCategoria().getLuogo().getValore().setValore("Brescia");
+	e.getCategoria().getData().getValore().setValore(dataEV);
+	e.getCategoria().getOra().getValore().setValore("10:10");
+	
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	i1.setCosto(10);
+	i2.setCosto(10);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	e.controlloData();
+	
+	String stato = e.getStato();
+	assertEquals(stato,"Fallita");
+	}
+	
+	@Test
+	public void testDataEliminazioneFalseDRitiroIns() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	Date dataRitiroIsc=new Date("01/01/2020");
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	boolean validita = e.controlloDataEliminazione();
+	assertTrue(validita);
+	}
+	
+	@Test
+	public void testDataEliminazioneTrueDRitiroIns() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	Date dataRitiroIsc=new Date("01/01/2019");
+	e.getCategoria().getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
+	
+	boolean validita = e.controlloDataEliminazione();
+	assertFalse(validita);
+	}
+	
+	
+	@Test
+	public void testDataEliminazioneTrueDRitiroNotIns() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	boolean validita = e.controlloDataEliminazione();
+	assertFalse(validita);
+	}
+	
+	@Test
+	public void testPostiMinimiPartecipanti1ConTolleranza() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getnPartecipanti().getValore().setValore(5);
+	e.getCategoria().getTolleranzaPartecipanti().getValore().setValore(2);
+	
+	
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	int posti= e.getPostiMinimiPartecipanti();
+	assertEquals(posti , 1);
+	}
+	
+	@Test
+	public void testPostiMinimiPartecipanti3NoTolleranza() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getnPartecipanti().getValore().setValore(5);
+	
+	
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	int posti= e.getPostiMinimiPartecipanti();
+	assertEquals(posti , 3);
+	}
+	
+	@Test
+	public void testPostiMinimiPartecipantiConTolleranzaSuff() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getnPartecipanti().getValore().setValore(1);
+	e.getCategoria().getTolleranzaPartecipanti().getValore().setValore(2);
+	
+	
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	int posti= e.getPostiMinimiPartecipanti();
+	assertEquals(posti , -3);
+	}
+	
+	@Test
+	public void testPostiMinimiPartecipantiNoTolleranzaSuff() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getnPartecipanti().getValore().setValore(1);
+	
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	int posti= e.getPostiMinimiPartecipanti();
+	assertEquals(posti , -1);
+	}
+	
+	@Test
+	public void testPostiLiberiConTolleranza() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getnPartecipanti().getValore().setValore(1);
+	e.getCategoria().getTolleranzaPartecipanti().getValore().setValore(2);
+	
+	
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	int posti= e.getPostiLiberi();
+	assertEquals(posti , 1);
+	}
+	
+	@Test
+	public void testPostiLiberiNoTolleranza() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getnPartecipanti().getValore().setValore(5);
+	
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	
+	int posti= e.getPostiLiberi();
+	assertEquals(posti , 3);
+	}
+	
+	@Test
+	public void testPostiLiberiConTolleranza0() 
+	{
+	Partita p = new Partita();
+	Utente u = new Utente("Prova");
+	Evento e = new Evento(p,u);
+	
+	e.getCategoria().getnPartecipanti().getValore().setValore(1);
+	e.getCategoria().getTolleranzaPartecipanti().getValore().setValore(2);
+	
+	
+	Iscrizioni i1= new Iscrizioni("Rosso",e);
+	Iscrizioni i2= new Iscrizioni("Verde",e);
+	Iscrizioni i3= new Iscrizioni("Giallo",e);
+	
+	e.getElencoIscritti().add(i1);
+	e.getElencoIscritti().add(i2);
+	e.getElencoIscritti().add(i3);
+	
+	int posti= e.getPostiLiberi();
+	assertEquals(posti , 0);
+	}
 	
 	
 }
