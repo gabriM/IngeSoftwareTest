@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import Codice.*;
+import Codice.Modello.*;
 import org.junit.Test;
 
 public class EventoTest {

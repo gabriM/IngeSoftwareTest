@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import Codice.*;
+import Codice.Modello.*;
 
 public class PartitaTest {
 

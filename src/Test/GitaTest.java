@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import Codice.*;
-import Codice.Gita;
+import Codice.Modello.*;
 
 public class GitaTest {
 

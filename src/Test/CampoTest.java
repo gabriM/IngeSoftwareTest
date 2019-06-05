@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Codice.*;
+import Codice.Modello.*;
 
 public class CampoTest {
 

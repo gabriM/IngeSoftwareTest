@@ -1,4 +1,4 @@
-package Codice;
+package Codice.Modello;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

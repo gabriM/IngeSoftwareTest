@@ -1,4 +1,4 @@
-package Codice;
+package Codice.Modello;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
