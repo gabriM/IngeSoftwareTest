@@ -146,8 +146,7 @@ public class Campo implements Serializable{
 	 */
 	public void inserisciValore()throws Exception {
 
-		if (!valore.getInserito()) {
-
+		
 			if (!valore.getInserito()) {
 				int inserimento = Utility.leggiIntero(0, 1, "Vuoi inserire " + nome + "? Digita 1 per SI e 0 pre NO");
 				if (inserimento == 0) {
@@ -180,7 +179,7 @@ public class Campo implements Serializable{
 			}
 		}
 
-	}
+	
 
 
 
