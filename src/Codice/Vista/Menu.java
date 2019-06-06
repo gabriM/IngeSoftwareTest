@@ -1,4 +1,6 @@
-package MyLib;
+package Codice.Vista;
+
+import MyLib.Utility;
 
 public class Menu 
 {
