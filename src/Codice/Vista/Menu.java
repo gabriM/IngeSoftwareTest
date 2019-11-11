@@ -2,7 +2,7 @@ package Codice.Vista;
 
 import MyLib.Utility;
 
-public class Menu 
+public class Gui
 {
 	final private static String CORNICE = "******************************************";
 	final private static String VOCE_USCITA = "0 - Esci";
@@ -10,7 +10,7 @@ public class Menu
 	"Digita il numero dell'opzione desiderata";
 	private String titolo;
 	private String [] voci;
-	public Menu (String _titolo, String [] _voci)
+	public Gui (String _titolo, String [] _voci)
 	{
 	titolo = _titolo;
 	voci = _voci;
