@@ -1,6 +1,9 @@
 package Codice.Modello;
 
 import java.util.*;
+
+import Codice.Vista.InputOutput;
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
@@ -25,7 +28,7 @@ public class Campo implements Serializable{
 	private String nome;
 	private String descrizione;
 	private Boolean obbligatorio;
-	private Valore valore;
+	private ValoreA valore;
 
 
 	/*Costruttori*/
@@ -39,11 +42,32 @@ public class Campo implements Serializable{
 	 *
 	 * @author Gabriele Manenti
 	 */
-	public Campo(String _nome, String _descrizione, Boolean _obbligatorio, int _valore){
+	public Campo(String _nome, String _descrizione, Boolean _obbligatorio, testoV testo){
 		nome =_nome;
 		descrizione= _descrizione;
 		obbligatorio = _obbligatorio;
-		valore= new Valore(_valore);
+		valore=testo;
+
+	}
+	public Campo(String _nome, String _descrizione, Boolean _obbligatorio,interoV intero){
+		nome =_nome;
+		descrizione= _descrizione;
+		obbligatorio = _obbligatorio;
+		valore=intero;
+	}
+	
+	public Campo(String _nome, String _descrizione, Boolean _obbligatorio,etaV eta){
+		nome =_nome;
+		descrizione= _descrizione;
+		obbligatorio = _obbligatorio;
+		valore=eta;
+	}
+	
+	public Campo(String _nome, String _descrizione, Boolean _obbligatorio,DataV data){
+		nome =_nome;
+		descrizione= _descrizione;
+		obbligatorio = _obbligatorio;
+		valore=data;
 	}
 
 	/*Getters*/
@@ -80,7 +104,7 @@ public class Campo implements Serializable{
 	 *
 	 * @author Gabriele Manenti
 	 */
-	public Valore getValore() {
+	public ValoreA getValore() {
 		return valore;
 	}
 
@@ -122,7 +146,7 @@ public class Campo implements Serializable{
 	 *
 	 * @author Gabriele Manenti
 	 */
-	public void setValore(Valore valore) {
+	public void setValore(ValoreA valore) {
 		this.valore = valore;
 	}
 
@@ -148,32 +172,10 @@ public class Campo implements Serializable{
 
 		
 			if (!valore.getInserito()) {
-				int inserimento = Utility.leggiIntero(0, 1, "Vuoi inserire " + nome + "? Digita 1 per SI e 0 pre NO");
-				if (inserimento == 0) {
-
-				} else {
-					switch (valore.getTipo()) {
-						case 0:
-							valore.setValore(Utility.leggiLinea("inserisci " + nome));
-							break;
-						case 1:
-							valore.setValore(Utility.leggiIntero(0, 9999999, "inserisci " + nome));
-							break;
-						case 2:
-							String data = Utility.leggiData("inserisci " + nome + "(gg/mm/aaaa)");
-							Date date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-							valore.setValore(date);
-							break;
-						case 3:
-							String ora = Utility.leggiOra("Inserisci " + nome + " (hh:mm)");
-							valore.setValore(ora);
-							break;
-						case 4:
-							ArrayList<Integer> eta = Utility.leggiFasciaEta("Inserisci" + nome);
-							valore.setEta(eta);
-
-							break;
-					}
+				boolean inserimento = InputOutput.richiestaInserimento(nome);
+				if (inserimento) {
+					valore.inserisciValore(nome);
+					valore.setInserito(true);	
 				}
 
 			}

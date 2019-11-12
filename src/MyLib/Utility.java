@@ -45,13 +45,13 @@ public class Utility
 		return nome;
 	}
 	
-	public static ArrayList<Integer> leggiFasciaEta(String msg)
+	public static int[] leggiFasciaEta(String msg)
 	{
-		ArrayList<Integer> eta=new ArrayList<>();
+		int eta[] = new int[2];
 		int eta1=Utility.leggiIntero(1, 110, "Inserisci estremo inferiore");
 		int eta2=Utility.leggiIntero(eta1, 110, "Inserisci estremo superiore");
-		eta.add(eta1);
-		eta.add(eta2);
+		eta[0]=eta1;
+		eta[1]=eta2;
 		
 		return eta;
 	}

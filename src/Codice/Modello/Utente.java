@@ -27,7 +27,7 @@ public class Utente implements Serializable{
 
 	/*Attributi*/
 	private String nomeUtente;
-	private ArrayList<Integer> fasciaEta;
+	private int[] fasciaEta;
 	private ArrayList<Categoria> categorieInteresse= new ArrayList<>();
 	private ArrayList<Evento> eventiUtente = new ArrayList<>();
 	private ArrayList<Messaggio> messaggiUtente = new ArrayList<>();
@@ -98,7 +98,7 @@ public class Utente implements Serializable{
 	 *
 	 * @author Matteo Gusmini
 	 */
-	public ArrayList<Integer> getFasciaEta() {
+	public int[] getFasciaEta() {
 		return fasciaEta;
 	}
 
@@ -155,7 +155,7 @@ public class Utente implements Serializable{
 	 *
 	 * @author Matteo Gusmini
 	 */
-	public void setFasciaEta(ArrayList<Integer> fasciaEta) {
+	public void setFasciaEta(int[] fasciaEta) {
 		this.fasciaEta = fasciaEta;
 	}
 

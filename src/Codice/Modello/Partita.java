@@ -23,8 +23,8 @@ import MyLib.Utility;
 public class Partita extends Categoria {
 
 	/*Attributi*/
-	private Campo genere=new Campo("Genere","Indica se i partecipanti sono maschi o femmine",true,STRING);
-	private Campo fasciaEta=new Campo("Fascia di età","Indica l'età massima e minima per partecipare all'evento",true,ETA);
+	private Campo genere=new Campo("Genere","Indica se i partecipanti sono maschi o femmine",true,new testoV());
+	private Campo fasciaEta=new Campo("Fascia di età","Indica l'età massima e minima per partecipare all'evento",true,new etaV());
 	private ArrayList<Campo> elencoCampi = new ArrayList<>();
 
 	/*Costruttori*/
@@ -160,7 +160,7 @@ public class Partita extends Categoria {
 		eta.add(16);
 		eta.add(45);
 		genere.getValore().setValore("Maschi");
-		fasciaEta.getValore().setEta(eta);
+		fasciaEta.getValore().setValore(eta);
     }
 
 }

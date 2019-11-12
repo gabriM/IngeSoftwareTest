@@ -86,12 +86,12 @@ public class Main {
 		if(ServizioFile.esistenzaFile(fileutenti) == 0) {
 			ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
 		}else
-			elencoUtenti=  (ArrayList<Utente>) ServizioFile.caricaSingoloOggetto(fileutenti);
+			//elencoUtenti=  (ArrayList<Utente>) ServizioFile.caricaSingoloOggetto(fileutenti);
 
 		if(ServizioFile.esistenzaFile(filebacheca) == 0) {
 			ServizioFile.salvaSingoloOggetto(filebacheca, bacheca);
 		}else
-			bacheca= (ListaEventi) ServizioFile.caricaSingoloOggetto(filebacheca);
+			//bacheca= (ListaEventi) ServizioFile.caricaSingoloOggetto(filebacheca);
 
 
 		/*Messaggio di benvenuto e richiesta nome per login*/
@@ -116,9 +116,12 @@ public class Main {
 			elencoUtenti.get(numUtente).inserisciDatiPersonali(categorie);
 		}
 		ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
-
+		
+		
+		
+		
 		/*Menu Scelta Opzioni*/
-		Menu myMenu= new Menu(NOMEMENU,OPZIONI);
+		GUI myMenu= new GUI(NOMEMENU,OPZIONI);
 		int scelta;
 		
 		
@@ -394,7 +397,7 @@ public class Main {
 				
 			case 7:
 				/*Visualizza i miei messaggi*/
-				Menu Menumsg= new Menu(NOMEMENUMSG,OPZIONIMSG);
+				GUI Menumsg= new GUI(NOMEMENUMSG,OPZIONIMSG);
 				int sceltamsg;
 				
 					do{
@@ -632,6 +635,27 @@ public class Main {
 					break;
 			}
 		}while(scelta!=0);
+	
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+
 		
 	}
 	
