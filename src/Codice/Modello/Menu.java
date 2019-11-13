@@ -99,18 +99,9 @@ public class Menu {
 
             /*Controlli su eventi in Bacheca e generazione di eventuali messaggi*/
 
-            generaMessaggi(bacheca, elencoUtenti);
+            Messaggio.generaMessaggi(bacheca, elencoUtenti);
 
-            /*
-            ArrayList<Messaggio> messaggiStato = new ArrayList<>(bacheca.controlloEventi());
-            for(int i=0;i<messaggiStato.size();i++){
-                for(int j=0; j<elencoUtenti.size();j++){
-                    if(messaggiStato.get(i).getDestinatario().equalsIgnoreCase(elencoUtenti.get(j).getNomeUtente())){
-                        elencoUtenti.get(j).getMessaggiUtente().add(messaggiStato.get(i));
-                    }
-                }
-            }
-            */
+          
             ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
 
 

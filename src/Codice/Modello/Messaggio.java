@@ -87,7 +87,7 @@ public class Messaggio implements Serializable{
 	}
 
 	/*Metodi*/
-	public void generaMessaggi(ListaEventi bacheca1, ArrayList<Utente> elencoUtenti1){
+	public static void generaMessaggi(ListaEventi bacheca1, ArrayList<Utente> elencoUtenti1){
 		ArrayList<Messaggio> messaggiStato = new ArrayList<>(bacheca1.controlloEventi());
 		for(int i=0;i<messaggiStato.size();i++){
 			for(int j=0; j<elencoUtenti1.size();j++){
