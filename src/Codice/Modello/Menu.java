@@ -89,6 +89,8 @@ public class Menu {
         //bacheca= (ListaEventi) ServizioFile.caricaSingoloOggetto(filebacheca);
 
     }
+
+/*
     public sceltaMenu(){
 
         GUI myMenu= new GUI(NOMEMENU,OPZIONI);
@@ -100,23 +102,11 @@ public class Menu {
             /*Controlli su eventi in Bacheca e generazione di eventuali messaggi*/
 
             Messaggio.generaMessaggi(bacheca, elencoUtenti);
-
-          
             ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
-
 
             /*Eliminazione eventi Falliti, Chiusi, Conclusi*/
 
-            eliminaEventoBacheca(bacheca);
-
-            /*
-            for(int i=0; i< bacheca.getElencoEventi().size();i++){
-                if(!bacheca.getElencoEventi().get(i).getStato().equalsIgnoreCase("Aperta") ){
-                    bacheca.getElencoEventi().remove(i);
-                }
-            }
-            */
-
+            Evento.eliminaEventoBacheca(bacheca);
             ServizioFile.salvaSingoloOggetto(filebacheca, bacheca);
 
             switch(scelta)
@@ -126,18 +116,9 @@ public class Menu {
 
                 case 1:
                     /*Visualizza categorie*/
+                    InputOutput.visualizzaCategorie(categorie);
+                    categorie.get((InputOutput.sceltaCategoria(categorie.size()))-1).visualizzaCampi();
 
-                    visualizzaCategorie(categorie);
-                    /*
-                    for(int i=0; i<categorie.size();i++){
-                        System.out.println(i+1+")");
-                        System.out.println(NOME + categorie.get(i).getNome());
-                        System.out.println(DESCRIZIONE + categorie.get(i).getDescrizione()+"\n");
-                    }
-                    int numCat= Utility.leggiIntero(1, categorie.size()+1, SCELTACATEGORIA);
-                    categorie.get(numCat-1).visualizzaCampi();
-
-                    */
                     break;
                 case 2:
                     /*Crea nuovo evento*/
@@ -612,7 +593,7 @@ public class Menu {
 
 }
 
-
+*/
 
 }
 }

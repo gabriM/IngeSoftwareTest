@@ -525,7 +525,7 @@ public class Categoria implements Serializable {
 		return (int) quotaIndividuale.getValore().getValore();
 	}
 
-	public void visualizzaCategorie(ArrayList<Categoria> categorie1) {
+	public int visualizzaCategorie(ArrayList<Categoria> categorie1) {
 		for (int i = 0; i < categorie1.size(); i++) {
 			System.out.println(i + 1 + ")");
 			System.out.println(NOME + categorie1.get(i).getNome());
@@ -533,10 +533,12 @@ public class Categoria implements Serializable {
 		}
 		int numCat = Utility.leggiIntero(1, categorie1.size() + 1, SCELTACATEGORIA);
 		categorie1.get(numCat - 1).visualizzaCampi();
+
+		return numCat;
 	}
 
 
-	public void elencoCategorieEvento(ArrayList<Categoria> categorie1) {
+	public int elencoCategorieEvento(ArrayList<Categoria> categorie1) {
 		for (int i = 0; i < categorie1.size(); i++) {
 			System.out.println(i + 1 + ")");
 			System.out.println(NOME + categorie1.get(i).getNome());
@@ -544,6 +546,7 @@ public class Categoria implements Serializable {
 		}
 
 		int numCatEvento = Utility.leggiIntero(1, categorie1.size() + 1, SCELTACATEGORIAEVENTO);
+		return numCatEvento;
 	}
 
 }

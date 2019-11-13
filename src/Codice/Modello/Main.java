@@ -158,8 +158,14 @@ public class Main {
 				break;
 			
 			case 1:
+
+				InputOutput.visualizzaCategorie(categorie);
+				categorie.get((InputOutput.sceltaCategoria(categorie.size()))-1).visualizzaCampi();
+
+
 				/*Visualizza categorie*/
-				
+				/*
+
 				for(int i=0; i<categorie.size();i++){
 					System.out.println(i+1+")");
 					System.out.println(NOME + categorie.get(i).getNome());
@@ -168,7 +174,7 @@ public class Main {
 				int numCat=Utility.leggiIntero(1, categorie.size()+1, SCELTACATEGORIA);
 				categorie.get(numCat-1).visualizzaCampi();
 				
-				
+				*/
 				break;
 			case 2:
 				/*Crea nuovo evento*/

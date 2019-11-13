@@ -449,7 +449,7 @@ public class Evento implements Serializable{
 		return costo;
 	}
 
-	public void eliminaEventoBacheca(ListaEventi bacheca1){
+	public static void eliminaEventoBacheca(ListaEventi bacheca1){
 		for(int i=0; i< bacheca1.getElencoEventi().size();i++){
 			if(!bacheca1.getElencoEventi().get(i).getStato().equalsIgnoreCase("Aperta") ){
 				bacheca1.getElencoEventi().remove(i);
