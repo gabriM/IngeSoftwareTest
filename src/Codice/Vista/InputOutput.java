@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import Codice.Modello.*;
+
 
 import Codice.Modello.Categoria;
 import MyLib.Utility;
@@ -12,10 +14,9 @@ public class InputOutput {
 
 	final static String NOME="Nome categoria: ";
 	final static String STATO="Stato: ";
-	final String POSTILIBERI="Posti liberi: ";
+    final static String NOMEEVENTO="Nome evento: ";
 	final static String DESCRIZIONE="Descrizione: ";
-	final static String SCELTACATEGORIA="Quale categoria vuoi vedere in dettaglio?";
-	final static String SCELTACATEGORIAEVENTO="Quale categoria di evento vuoi creare?";
+	final static String SCELTACATEGORIA="Quale categoria vuoi selezionare?";
 		
 	public static boolean richiestaInserimento(String nome){
 		boolean inserimento= false;
@@ -65,7 +66,21 @@ public class InputOutput {
 		int numCat = Utility.leggiIntero(1, max + 1, SCELTACATEGORIA);
 		return numCat;
 	}
-	
+
+	public static void visualizzaEventi(Utente utente){
+
+            for(int i=0; i<utente.getEventiUtente().size();i++){
+                System.out.println(i+1 +")");
+                if (utente.getEventiUtente().get(i).getCategoria().getTitolo().getValore().getInserito()){
+                    System.out.println(NOMEEVENTO + utente.getEventiUtente().get(i).getCategoria().getTitolo().getValore().getValore());
+                    System.out.println("Data Ritiro Iscrizione: " + utente.getEventiUtente().get(i).getCategoria().getDataRitiroIscrizione().getValore().getValore());
+                }
+                else {
+                    System.out.println(NOMEEVENTO + "Titolo non ancora inserito");
+                }
+                System.out.println(NOME + utente.getEventiUtente().get(i).getCategoria().getNome());
+            }
+    }
 	
 	
 }

@@ -90,7 +90,7 @@ public class Menu {
 
     }
 
-/*
+
     public sceltaMenu(){
 
         GUI myMenu= new GUI(NOMEMENU,OPZIONI);
@@ -123,20 +123,9 @@ public class Menu {
                 case 2:
                     /*Crea nuovo evento*/
 
-                    elencoCategorieEvento(categorie);
-                    /*
-
                     /*Elenco delle categorie a cui può appartenere l'evento*/
-
-                    /*
-                    for(int i=0; i<categorie.size();i++){
-                        System.out.println(i+1+")");
-                        System.out.println(NOME + categorie.get(i).getNome());
-                        System.out.println(DESCRIZIONE + categorie.get(i).getDescrizione()+"\n");
-                    }
-
-                    int numCatEvento=Utility.leggiIntero(1, categorie.size()+1, SCELTACATEGORIAEVENTO);
-                    */
+                    InputOutput.visualizzaCategorie(categorie);
+                    int numCatEvento = InputOutput.sceltaCategoria(categorie.size());
 
                     /*Richiesta inserimento dettaglio eventi*/
                     switch(numCatEvento){
@@ -173,17 +162,7 @@ public class Menu {
                 case 3:
                     /*Visualizza i miei eventi non pubblicati*/
                     if(elencoUtenti.get(numUtente).getEventiUtente().size()!=0){
-                        for(int i=0; i<elencoUtenti.get(numUtente).getEventiUtente().size();i++){
-                            System.out.println(i+1 +")");
-                            if (elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getTitolo().getValore().getInserito()){
-                                System.out.println(NOMEEVENTO + elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getTitolo().getValore().getValore());
-                                System.out.println("Data Ritiro Iscrizione: " + elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getDataRitiroIscrizione().getValore().getValore());
-                            }
-                            else {
-                                System.out.println(NOMEEVENTO + "Titolo non ancora inserito");
-                            }
-                            System.out.println(NOME + elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getNome());
-                        }
+                       InputOutput.visualizzaEventi(elencoUtenti.get(numUtente));
                     }else {
                         System.out.println(EVENTIVUOTI);
                     }
