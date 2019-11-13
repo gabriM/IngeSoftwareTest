@@ -239,7 +239,13 @@ public class Utente implements Serializable{
 
 		}
 
-		
+		public boolean controlloEventiNonPubblicati(){
+
+		if(eventiUtente.size()!=0)
+			return true;
+		else
+			return false;
+		}
 	
 	
 }

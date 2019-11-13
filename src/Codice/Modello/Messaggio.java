@@ -97,5 +97,5 @@ public class Messaggio implements Serializable{
 			}
 		}
 	}
-		
+
 }

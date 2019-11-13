@@ -153,15 +153,11 @@ public class Menu {
                     ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
 
 
-
                     break;
-
-
-
 
                 case 3:
                     /*Visualizza i miei eventi non pubblicati*/
-                    if(elencoUtenti.get(numUtente).getEventiUtente().size()!=0){
+                    if(elencoUtenti.get(numUtente).controlloEventiNonPubblicati(){
                        InputOutput.visualizzaEventi(elencoUtenti.get(numUtente));
                     }else {
                         System.out.println(EVENTIVUOTI);
@@ -171,29 +167,19 @@ public class Menu {
                     /*Pubblica eventi*/
 
                     /*Visualizza i propri eventi non ancora inseriti*/
-                    if(elencoUtenti.get(numUtente).getEventiUtente().size()!=0){
+                    if(elencoUtenti.get(numUtente).controlloEventiNonPubblicati()){
                         System.out.println("0) Esci");
-                        for(int i=0; i<elencoUtenti.get(numUtente).getEventiUtente().size();i++){
-                            System.out.println(i +1 +")");
-                            if (elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getTitolo().getValore().getInserito()){
-                                System.out.println(NOMEEVENTO + elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getTitolo().getValore().getValore() );
-                            }
-                            else {
-                                System.out.println(NOMEEVENTO + "Titolo non ancora inserito");
-                            }
-                            System.out.println(NOME + elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getNome());
-                        }
+                        InputOutput.visualizzaEventi(elencoUtenti.get(numUtente));
 
                         /*Scelta evento da pubblicare*/
-                        int numEventoPubblicato=Utility.leggiIntero(0, elencoUtenti.get(numUtente).getEventiUtente().size(), SCELTAEVENTOPUBBLICAZIONE);
+                        int numEventoPubblicato=InputOutput.sceltaEvento(elencoUtenti.get(numUtente).getEventiUtente().size());
 
 
                         if(numEventoPubblicato!=0){
 
                             Evento eventop = elencoUtenti.get(numUtente).getEventiUtente().get(numEventoPubblicato -1);
-
-
                             eventop.isValido();
+
                             /*Controllo validita evento*/
                             if(eventop.getvalidita() == true){
                                 if(!eventop.getCategoria().getDataRitiroIscrizione().getValore().getInserito()){
@@ -240,7 +226,7 @@ public class Menu {
                                 System.out.println(NONVALIDITAPUBBLICAZIONE);
 
                                 /*Possibilità di inserire altri dettagli all'evento*/
-                                int inserimento= Utility.leggiIntero(0,1, "Vuoi inserire completare l'evento? Digita 1 per SI e 0 pre NO");
+                                int inserimento= InputOutput.sceltaInserimento();
                                 if (inserimento==1){
                                     eventop.inserisciDettagliEvento();
                                 }
@@ -258,19 +244,7 @@ public class Menu {
                     break;
                 case 5:
                     /*Visualizza Bacheca*/
-
-                    if(bacheca.getElencoEventi().size() != 0){
-                        for(int i=0; i<bacheca.getElencoEventi().size();i++){
-                            System.out.println(i+1 +")");
-                            System.out.println(NOMEEVENTO + bacheca.getElencoEventi().get(i).getCategoria().getTitolo().getValore().getValore());
-                            System.out.println(NOME + bacheca.getElencoEventi().get(i).getCategoria().getNome());
-                            System.out.println(STATO + bacheca.getElencoEventi().get(i).getStato());
-                            System.out.println(POSTILIBERI + bacheca.getElencoEventi().get(i).getPostiLiberi());
-                        }
-
-                    }else{
-                        System.out.println(BACHECAVUOTA);
-                    }
+                    InputOutput.visualizzaEventiBacheca(bacheca);
                     break;
 
                 case 6:
@@ -321,11 +295,8 @@ public class Menu {
                         System.out.println(BACHECAEVENTIVUOTA);
                     }
 
-
-
                     ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
                     ServizioFile.salvaSingoloOggetto(filebacheca, bacheca);
-
 
                     break;
 

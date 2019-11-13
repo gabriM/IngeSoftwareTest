@@ -76,4 +76,10 @@ public class ListaEventi implements Serializable {
 		
 	}
 
+	public boolean controlloEventiBacheca(){
+	if(elencoEventi.size()!=0)
+			return true;
+		else
+			return false;
+}
 }
