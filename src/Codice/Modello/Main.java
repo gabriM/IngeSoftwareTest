@@ -223,21 +223,11 @@ public class Main {
 				
 			case 3:
 				/*Visualizza i miei eventi non pubblicati*/
-				if(elencoUtenti.get(numUtente).getEventiUtente().size()!=0){
-					for(int i=0; i<elencoUtenti.get(numUtente).getEventiUtente().size();i++){
-						System.out.println(i+1 +")");
-						if (elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getTitolo().getValore().getInserito()){
-							System.out.println(NOMEEVENTO + elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getTitolo().getValore().getValore());
-							System.out.println("Data Ritiro Iscrizione: " + elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getDataRitiroIscrizione().getValore().getValore());
-						}
-						else {
-							System.out.println(NOMEEVENTO + "Titolo non ancora inserito");
-						}
-						System.out.println(NOME + elencoUtenti.get(numUtente).getEventiUtente().get(i).getCategoria().getNome());
-					}
-				}else {
-					System.out.println(EVENTIVUOTI);
-				}
+				 if(elencoUtenti.get(numUtente).getEventiUtente().size()!=0){
+                     InputOutput.visualizzaEventi(elencoUtenti.get(numUtente));
+                  }else {
+                      System.out.println(EVENTIVUOTI);
+                  }
 				break;
 			case 4:
 				/*Pubblica eventi*/
