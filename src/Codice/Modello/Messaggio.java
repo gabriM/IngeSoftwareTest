@@ -1,6 +1,15 @@
 package Codice.Modello;
 
 import java.io.Serializable;
+import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+import Codice.Vista.*;
+import MyLib.ServizioFile;
+import MyLib.Utility.*;
 
 /**
  * Classe che definisce un <i>Messaggio</i>.
@@ -75,6 +84,18 @@ public class Messaggio implements Serializable{
 	 */
 	public void setTesto(String testo) {
 		this.testo = testo;
+	}
+
+	/*Metodi*/
+	public void generaMessaggi(ListaEventi bacheca1, ArrayList<Utente> elencoUtenti1){
+		ArrayList<Messaggio> messaggiStato = new ArrayList<>(bacheca1.controlloEventi());
+		for(int i=0;i<messaggiStato.size();i++){
+			for(int j=0; j<elencoUtenti1.size();j++){
+				if(messaggiStato.get(i).getDestinatario().equalsIgnoreCase(elencoUtenti1.get(j).getNomeUtente())){
+					elencoUtenti1.get(j).getMessaggiUtente().add(messaggiStato.get(i));
+				}
+			}
+		}
 	}
 		
 }

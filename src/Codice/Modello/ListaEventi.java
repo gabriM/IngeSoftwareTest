@@ -75,4 +75,5 @@ public class ListaEventi implements Serializable {
 		return messaggi;
 		
 	}
+
 }
