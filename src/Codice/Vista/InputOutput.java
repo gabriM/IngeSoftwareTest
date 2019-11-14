@@ -7,7 +7,7 @@ import java.util.Date;
 import Codice.Modello.*;
 
 
-import Codice.Modello.Categoria;
+
 import MyLib.Utility;
 
 public class InputOutput {
@@ -82,7 +82,7 @@ public class InputOutput {
 		return inserimento;
 	}
 
-	public static void visualizzaCategorie(ArrayList<Categoria> categorie1){
+	public static void visualizzaCategorie(ArrayList<CategoriaA> categorie1){
 		for(int i=0; i<categorie1.size();i++){
 			System.out.println(i+1+")");
 			System.out.println(NOME + categorie1.get(i).getNome());
@@ -96,7 +96,7 @@ public class InputOutput {
 	}
 
 	public static void visualizzaEventi(Utente utente){
-
+			System.out.println("0) Esci");	
             for(int i=0; i<utente.getEventiUtente().size();i++){
                 System.out.println(i+1 +")");
                 if (utente.getEventiUtente().get(i).getCategoria().getTitolo().getValore().getInserito()){
@@ -121,8 +121,7 @@ public class InputOutput {
     }
 
     public static void visualizzaEventiBacheca(ListaEventi bacheca){
-
-        if(bacheca.controlloEventiBacheca()){
+    		System.out.println("0) Esci");
             for(int i=0; i<bacheca.getElencoEventi().size();i++){
                 System.out.println(i+1 +")");
                 System.out.println(NOMEEVENTO + bacheca.getElencoEventi().get(i).getCategoria().getTitolo().getValore().getValore());
@@ -131,9 +130,12 @@ public class InputOutput {
                 System.out.println(POSTILIBERI + bacheca.getElencoEventi().get(i).getPostiLiberi());
             }
 
-        }else{
-            System.out.println(BACHECAVUOTA);
-        }
+        
+    }
+    
+    public static void stampaCampo(String nome, String descrizione, Boolean obbligatorio){
+    	String info= new String("Nome: "+ nome +"\n" +"Descrizione: " + descrizione+ "\n"+ "Obbligatoria: " + obbligatorio +"\n");
+    	System.out.println(info);
     }
 
 }

@@ -159,9 +159,8 @@ public class Campo implements Serializable{
 	 *
 	 * @author Gabriele Manenti
 	 */
-	public String visualizzaCampo(){
-		String info= new String("Nome: "+ nome +"\n" +"Descrizione: " + descrizione+ "\n"+ "Obbligatoria: " + obbligatorio +"\n");
-		return info;
+	public void visualizzaCampo(){
+		InputOutput.stampaCampo(nome, descrizione, obbligatorio);
 	}
 	/**
 	 * Assegna un valore al campo inserito

@@ -28,7 +28,7 @@ public class Utente implements Serializable{
 	/*Attributi*/
 	private String nomeUtente;
 	private int[] fasciaEta;
-	private ArrayList<Categoria> categorieInteresse= new ArrayList<>();
+	private ArrayList<CategoriaA> categorieInteresse= new ArrayList<>();
 	private ArrayList<Evento> eventiUtente = new ArrayList<>();
 	private ArrayList<Messaggio> messaggiUtente = new ArrayList<>();
 	private ArrayList <Utente> Utentiamici = new ArrayList<>();
@@ -80,7 +80,7 @@ public class Utente implements Serializable{
 	 *
 	 * @author Matteo Gusmini
 	 */
-	public ArrayList<Categoria> getCategorieInteresse() {
+	public ArrayList<CategoriaA> getCategorieInteresse() {
 		return categorieInteresse;
 	}
 	/**
@@ -137,7 +137,7 @@ public class Utente implements Serializable{
 	 *
 	 * @author Matteo Gusmini
 	 */
-	public void setCategorieInteresse(ArrayList<Categoria> categorieInteresse) {
+	public void setCategorieInteresse(ArrayList<CategoriaA> categorieInteresse) {
 		this.categorieInteresse = categorieInteresse;
 	}
 	/**
@@ -197,20 +197,20 @@ public class Utente implements Serializable{
 	/**
 	 * Metodo che permette di definire i dati personali di un utente
 	 *
-	 * @param elencoCategorie l'elenco delle categorie
+	 * @param categorie l'elenco delle categorie
 	 *
 	 * @author Matteo Gusmini
 	 */
-	public void inserisciDatiPersonali(ArrayList<Categoria> elencoCategorie){
+	public void inserisciDatiPersonali(ArrayList<CategoriaA> categorie){
 		int inserimento= Utility.leggiIntero(0,1, "Vuoi modificare l'elenco delle tue categorie preferite? Digita 1 per SI e 0 pre NO");
 
 		if(inserimento==0){
 
 		}
 		else{
-			ArrayList<Categoria> nuoveCategorie= new ArrayList<>();
-			ArrayList<Categoria> sceltaCategorie= new ArrayList<>();
-			sceltaCategorie= (ArrayList<Categoria>) elencoCategorie.clone();
+			ArrayList<CategoriaA> nuoveCategorie= new ArrayList<>();
+			ArrayList<CategoriaA> sceltaCategorie= new ArrayList<>();
+			sceltaCategorie= (ArrayList<CategoriaA>) categorie.clone();
 			int numCat=0;
 			do{
 				System.out.println("0) Esci");

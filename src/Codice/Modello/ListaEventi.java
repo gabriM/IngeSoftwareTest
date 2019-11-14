@@ -82,4 +82,16 @@ public class ListaEventi implements Serializable {
 		else
 			return false;
 }
+
+	public ArrayList<Evento> eventiValidi(Utente utente) {
+		
+		ArrayList<Evento> eventiValidi=new ArrayList<>();
+		/*Controlla se esite almeno un evento a cui potersi iscrivere*/
+		for(int i=0; i< elencoEventi.size(); i++){
+			if(!elencoEventi.get(i).giaIscritto(utente)&& elencoEventi.get(i).getStato().equalsIgnoreCase("Aperta")&& elencoEventi.get(i).getPostiLiberi()>0)
+				eventiValidi.add(elencoEventi.get(i));
+		}
+		return eventiValidi;
+	}
+
 }

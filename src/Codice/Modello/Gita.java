@@ -19,7 +19,7 @@ import MyLib.Utility;
  *
  * @version 5.0 1 Febbraio 2019
  */
-public class Gita extends Categoria {
+public class Gita extends CategoriaA {
 	private Campo costoPasti=new Campo("Costo pasti","Indica il costo se si vuole usufruire dei pasti forniti dall'organizzazione",true,new interoV());
 	private Campo mezzoTrasporto=new Campo("Mezzo di trasporto","Indica il mezzo di trasporto con cui si raggiungerà il luogo di destinazione",true,new testoV());
 	private Campo costoTrasporto=new Campo("Costo del trasporto","Indica il prezzo da pagare se si vuole usufruire del trasporto fornito dall'organizazione",true,new interoV());
@@ -34,7 +34,7 @@ public class Gita extends Categoria {
 	 */
 	public Gita(){
 		super("Gita in Citt�","Evento che prevede un viaggio in una citt� Italiana o Europea");
-		creaArray();
+		creaArrayCampi();
 	}
 
 	/*Getters*/
@@ -122,31 +122,7 @@ public class Gita extends Categoria {
 	}
 
 	/*Metodi*/
-	/**
-	 * Crea array con tutti i campi relativi alla categoria Partita
-	 *
-	 * @author Gabriele Manenti
-	 */
-	public void creaArray(){
-			
-			elencoCampi.add(super.getTitolo());
-			elencoCampi.add(super.getnPartecipanti());
-			elencoCampi.add(super.getTolleranzaPartecipanti());
-			elencoCampi.add(super.getTermineIscrizione());
-			elencoCampi.add(super.getLuogo());
-			elencoCampi.add(super.getData());
-			elencoCampi.add(super.getOra());
-			elencoCampi.add(super.getDurata());
-			elencoCampi.add(super.getQuotaIndividuale());
-			elencoCampi.add(super.getCompresoQuota());
-			elencoCampi.add(super.getDataFine());
-			elencoCampi.add(super.getDataRitiroIscrizione());
-			elencoCampi.add(super.getOraFine());
-			elencoCampi.add(super.getNote());
-			elencoCampi.add(costoPasti);
-			elencoCampi.add(mezzoTrasporto);
-			elencoCampi.add(costoTrasporto);
-		}
+
 	/**
 	 * Ritorna una stringa che descrive tutti i campi della categoria Partita
 	 *
@@ -155,10 +131,10 @@ public class Gita extends Categoria {
 	 * @author Gabriele Manenti
 	 */
 	public void visualizzaCampi(){
-		super.visualizzaCampi();
+		
 		for (int i=0; i< elencoCampi.size(); i++){
 			
-			System.out.println(elencoCampi.get(i).visualizzaCampo());
+			elencoCampi.get(i).visualizzaCampo();
 		}
 	}
 	/**
@@ -169,7 +145,6 @@ public class Gita extends Categoria {
 	 * @author Gabriele Manenti
 	 */
 	 public void inserisciCampi()throws Exception{
-	    	super.inserisciCampi();
 	    	for (int i=0; i< elencoCampi.size(); i++){
 				elencoCampi.get(i).inserisciValore();
 				
@@ -200,6 +175,30 @@ public class Gita extends Categoria {
 				costo=costo + (int) costoTrasporto.getValore().getValore();
 			}
 			return costo;
-		} 
+		}
+
+	@Override
+	public void creaArrayCampi() {
+		elencoCampi.add(getTitolo());
+		elencoCampi.add(getnPartecipanti());
+		elencoCampi.add(getTolleranzaPartecipanti());
+		elencoCampi.add(getTermineIscrizione());
+		elencoCampi.add(getLuogo());
+		elencoCampi.add(getData());
+		elencoCampi.add(getOra());
+		elencoCampi.add(getDurata());
+		elencoCampi.add(getQuotaIndividuale());
+		elencoCampi.add(getCompresoQuota());
+		elencoCampi.add(getDataFine());
+		elencoCampi.add(getDataRitiroIscrizione());
+		elencoCampi.add(getOraFine());
+		elencoCampi.add(getNote());
+		
+		
+		elencoCampi.add(costoPasti);
+		elencoCampi.add(mezzoTrasporto);
+		elencoCampi.add(costoTrasporto);
+		
+	} 
 
 }

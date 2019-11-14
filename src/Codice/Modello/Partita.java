@@ -20,7 +20,13 @@ import MyLib.Utility;
  *
  * @version 5.0 1 Febbraio 2019
  */
-public class Partita extends Categoria {
+public class Partita extends CategoriaA {
+	
+	final String NOME = "Partita di Calcio";
+	final String DESCRIZIONE = "Evento sportivo che prevede un match di 90 minuti";
+	
+	
+	
 
 	/*Attributi*/
 	private Campo genere=new Campo("Genere","Indica se i partecipanti sono maschi o femmine",true,new testoV());
@@ -36,7 +42,7 @@ public class Partita extends Categoria {
 	 */
 	public Partita(){
 		super("Partita di Calcio","Evento sportivo che prevede un match di 90 minuti");
-		creaArray();
+		creaArrayCampi();
 	}
 
 	/*Getters*/
@@ -98,30 +104,7 @@ public class Partita extends Categoria {
 	}
 
 	/*Metodi*/
-	/**
-	 * Crea array con tutti i campi relativi alla categoria Partita
-	 *
-	 * @author Matteo Gusmini
-	 */
-	public void creaArray(){
-		
-		elencoCampi.add(super.getTitolo());
-		elencoCampi.add(super.getnPartecipanti());
-		elencoCampi.add(super.getTolleranzaPartecipanti());
-		elencoCampi.add(super.getTermineIscrizione());
-		elencoCampi.add(super.getLuogo());
-		elencoCampi.add(super.getData());
-		elencoCampi.add(super.getOra());
-		elencoCampi.add(super.getDurata());
-		elencoCampi.add(super.getQuotaIndividuale());
-		elencoCampi.add(super.getCompresoQuota());
-		elencoCampi.add(super.getDataFine());
-		elencoCampi.add(super.getDataRitiroIscrizione());
-		elencoCampi.add(super.getOraFine());
-		elencoCampi.add(super.getNote());
-		elencoCampi.add(genere);
-		elencoCampi.add(fasciaEta);
-	}
+
 	/**
 	 * Ritorna una stringa che descrive tutti i campi della categoria Partita
 	 *
@@ -130,21 +113,17 @@ public class Partita extends Categoria {
 	 * @author Matteo Gusmini
 	 */
     public void visualizzaCampi(){
-		super.visualizzaCampi();
 		for (int i=0; i< elencoCampi.size(); i++){
-			
-			System.out.println(elencoCampi.get(i).visualizzaCampo());
+			elencoCampi.get(i).visualizzaCampo();
 		}
 	}
 	/**
 	 * Assegna i valori ai campi di partita
 	 *
-	 * @throws Exception in caso di arraylist vuoto
-	 *
 	 * @author Matteo Gusmini
+	 * @throws Exception 
 	 */
-    public void inserisciCampi()throws Exception{
-    	super.inserisciCampi();
+    public void inserisciCampi() throws Exception{
     	for (int i=0; i< elencoCampi.size(); i++){
 			elencoCampi.get(i).inserisciValore();
 			
@@ -155,13 +134,34 @@ public class Partita extends Categoria {
 	 *
 	 * @author Matteo Gusmini
 	 */
-    public void inserisciValoriPredefiniti(){
-		ArrayList<Integer> eta = new ArrayList<Integer>();
-		eta.add(16);
-		eta.add(45);
-		genere.getValore().setValore("Maschi");
-		fasciaEta.getValore().setValore(eta);
-    }
+   
+	@Override
+	public void creaArrayCampi() {
+		elencoCampi.add(getTitolo());
+		elencoCampi.add(getnPartecipanti());
+		elencoCampi.add(getTolleranzaPartecipanti());
+		elencoCampi.add(getTermineIscrizione());
+		elencoCampi.add(getLuogo());
+		elencoCampi.add(getData());
+		elencoCampi.add(getOra());
+		elencoCampi.add(getDurata());
+		elencoCampi.add(getQuotaIndividuale());
+		elencoCampi.add(getCompresoQuota());
+		elencoCampi.add(getDataFine());
+		elencoCampi.add(getDataRitiroIscrizione());
+		elencoCampi.add(getOraFine());
+		elencoCampi.add(getNote());
+		
+		
+		elencoCampi.add(genere);
+		elencoCampi.add(fasciaEta);
+	}
+
+	@Override
+	public int sceltaOpzioni() {
+		
+		return (int) getQuotaIndividuale().getValore().getValore();
+	}
 
 }
 

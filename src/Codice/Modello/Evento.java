@@ -32,7 +32,7 @@ public class Evento implements Serializable{
 
 
 	/*Attributi*/
-	private Categoria categoria;
+	private CategoriaA categoria;
 	private Boolean validita;
 	private Utente creatore;
 	private ArrayList <Iscrizioni> elencoIscritti = new ArrayList<>();
@@ -47,7 +47,7 @@ public class Evento implements Serializable{
 	 *
 	 * @author Matteo Gusmini
 	 */
-	public Evento(Categoria _categoria, Utente _creatore){
+	public Evento(CategoriaA _categoria, Utente _creatore){
 		categoria= _categoria;
 		creatore=_creatore;
 		validita = false;
@@ -61,7 +61,7 @@ public class Evento implements Serializable{
 	 *
 	 * @author Matteo Gusmini
 	 */
-	public Categoria getCategoria() {
+	public CategoriaA getCategoria() {
 		return categoria;
 	}
 	/**
@@ -108,7 +108,7 @@ public class Evento implements Serializable{
 	 *
 	 * @author Matteo Gusmini
 	 */
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(CategoriaA categoria) {
 		this.categoria = categoria;
 	}
 	/**
@@ -154,7 +154,7 @@ public class Evento implements Serializable{
 	 *
 	 * @author Matteo Gusmini
 	 */
-	public void isValido(){
+	public boolean isValido(){
 		validita=true;
 		
 		for (int i=0; i<categoria.getElencoCampi().size(); i++){
@@ -162,7 +162,7 @@ public class Evento implements Serializable{
 				validita=false;
 			}
 		}
-		
+		return validita;
 	}
 	/**
 	 * Assegna i valori a campi dell'evento
@@ -172,34 +172,7 @@ public class Evento implements Serializable{
 	public void inserisciDettagliEvento()throws Exception{
 		categoria.inserisciCampi();
 	}
-	/**
-	 * Genera un evento standard per velocizzare la fase di testing
-	 *
-	 * @author Matteo Gusmini
-	 */
-	public void inserisciValoriPredefinitiEvento()throws Exception{
-		Date termineIsc=new Date("10/07/2019");
-		Date dataEV=new Date("10/08/2019");
-		Date dataFine=new Date("10/09/2019");
-		Date dataRitiroIsc=new Date("10/06/2019");
-		
-		categoria.getTitolo().getValore().setValore("Amichevole test");
-		categoria.getnPartecipanti().getValore().setValore(5);
-		categoria.getTolleranzaPartecipanti().getValore().setValore(2);
-		categoria.getTermineIscrizione().getValore().setValore(termineIsc);
-		categoria.getLuogo().getValore().setValore("Predore");
-		categoria.getData().getValore().setValore(dataEV);
-		categoria.getOra().getValore().setValore("10:10");
-		categoria.getDurata().getValore().setValore("02:00");
-		categoria.getQuotaIndividuale().getValore().setValore("10 Euro");
-		categoria.getCompresoQuota().getValore().setValore("Niente");
-		categoria.getDataFine().getValore().setValore(dataFine);
-		categoria.getDataRitiroIscrizione().getValore().setValore(dataRitiroIsc);
-		categoria.getOraFine().getValore().setValore("12:10");
-		categoria.getNote().getValore().setValore("Vuoto");
-		categoria.inserisciValoriPredefiniti();
-		
-	}
+
 	/**
 	 * Metodo che, dato il nome di un utente, permette di sapere se questo utente è già iscritto ad un evento
 	 *
@@ -456,5 +429,12 @@ public class Evento implements Serializable{
 			}
 		}
 	}
+
+	public void creaEvento(Iscrizioni iscrizione) throws Exception {
+		inserisciDettagliEvento();
+		elencoIscritti.add(iscrizione);
+		
+	}
+
 
 }
