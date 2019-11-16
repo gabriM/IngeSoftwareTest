@@ -18,34 +18,35 @@ public class InputOutput {
 	final static String DESCRIZIONE="Descrizione: ";
 	final static String SCELTACATEGORIA="Quale categoria vuoi selezionare?";
 	final static String SCELTAEVENTO = "Quale evento vuoi selezionare?";
-    final String MSGBENVENUTO="Benvenuto nella social di gestione eventi";
-    final String MSGLOGIN="Inserisci il tuo nome utente per effettuare il login";
-    final String NOMEMENU="GESTIONE Eventi";
-    final String NOMEMENUMSG="GESTIONE Messaggi";
-    final String[] OPZIONIMSG={"Visualizza messaggi", "Elimina messaggi","Modifica dati personali"};
-    final String[] OPZIONI={"Visualizza Categorie Disponibili","Crea un nuovo evento","Visualizza i miei eventi non ancora pubblicati","Pubblica eventi","Visualizza Bacheca","Partecipa a evento","Pagina Utente", "Elimina Iscrizione evento", "Elimina evento","Invita persone ad evento","Genera evento standard per test"};
+    final static String MSGBENVENUTO="Benvenuto nella social di gestione eventi";
+    final static String MSGLOGIN="Inserisci il tuo nome utente per effettuare il login";
+    final static String NOMEMENU="GESTIONE Eventi";
+    final static String NOMEMENUMSG="GESTIONE Messaggi";
+    final static String[] OPZIONIMSG={"Visualizza messaggi", "Elimina messaggi","Modifica dati personali"};
+    final static String[] OPZIONI={"Visualizza Categorie Disponibili","Crea un nuovo evento","Visualizza i miei eventi non ancora pubblicati","Pubblica eventi","Visualizza Bacheca","Partecipa a evento","Pagina Utente", "Elimina Iscrizione evento", "Elimina evento","Invita persone ad evento","Genera evento standard per test"};
     final static String POSTILIBERI="Posti liberi: ";
-    final String SCELTACATEGORIAEVENTO="Quale categoria di evento vuoi creare?";
-    final String SCELTAISCEVENTO="A quale evento desideri iscriverti?";
-    final String SCELTAINVITOEVENTO="A quale evento desideri invitare altri utenti?";
-    final String SCELTAEVENTOPUBBLICAZIONE ="Quale evento vuoi pubblicare?";
-    final String SCELTAMSG ="Quale messaggio vuoi eliminare?";
-    final String VALIDITAPUBBLICAZIONE = "L'evento selezionato � valido, � stato pubblicato ed � visibile sulla bacheca.";
-    final String NONVALIDITAPUBBLICAZIONE = "L'evento selezionato non � valido! Selezionare un altro evento. \n (Un Evento � valido solo se � stato assegnato un valore a tutti i campi obbligatori)";
+    final static String SCELTACATEGORIAEVENTO="Quale categoria di evento vuoi creare?";
+    final static String SCELTAISCEVENTO="A quale evento desideri iscriverti?";
+    final static String SCELTAINVITOEVENTO="A quale evento desideri invitare altri utenti?";
+    final static String SCELTAEVENTOPUBBLICAZIONE ="Quale evento vuoi pubblicare?";
+    final static String SCELTAMSG ="Quale messaggio vuoi eliminare?";
+    final static String VALIDITAPUBBLICAZIONE = "L'evento selezionato � valido, � stato pubblicato ed � visibile sulla bacheca.";
+    final static String NONVALIDITAPUBBLICAZIONE = "L'evento selezionato non � valido! Selezionare un altro evento. \n (Un Evento � valido solo se � stato assegnato un valore a tutti i campi obbligatori)";
     final static String BACHECAVUOTA = "Non vi sono eventi validi pubblicati.";
-    final String BACHECAEVENTIVUOTA = "Non vi sono eventi validi a cui ti � consentito iscriverti.";
-    final String EVENTIVUOTI = "Non ci sono eventi creati e non acora pubblicati in bacheca.";
-    final String EVENTIPUBBLICATIVUOTI = "Non hai ancora pubblicato eventi in bacheca.";
-    final String MESSAGGIVUOTI = "Non ci sono messaggi.";
-    final String MSGEVENTO="Evento creato con successo";
-    final String MSGPROBDATE="Le date non sono in ordine logico. DATE CANCELLATE";
-    final String SCELTAELIMISCRIZIONE= "A quale evento vuoi cancellare la tua iscrizione?";
-    final String ISCRIZIONIVUOTE= "Non sei Iscritto a nessun evento o � passata la data limite per il ritiro dell'iscrizione.";
-    final String CANCELLAZIONIVUOTE= "Non hai creato nessun evento o � passata la data limite per il ritiro dell'evento.";
-    final String SCELTAELIMINEVENTO= "Quale evento pubblicato vuoi cancellare?";
-    final String EVENTICREATIVUOTI= "Non hai creato nessun evento a cui poter invitare i tuoi amici.";
-    final String AMICIVUOTI= "Non ti � possibile invitare nessun utente";
-    final String SCELTAINVITO= "Quale utente vuoi invitare?";
+    final static String BACHECAEVENTIVUOTA = "Non vi sono eventi validi a cui ti � consentito iscriverti.";
+    final static String EVENTIVUOTI = "Non ci sono eventi creati e non acora pubblicati in bacheca.";
+    final static String EVENTIPUBBLICATIVUOTI = "Non hai ancora pubblicato eventi in bacheca.";
+    final static String MESSAGGIVUOTI = "Non ci sono messaggi.";
+    final static String MSGEVENTO="Evento creato con successo";
+    final static String MSGPROBDATE="Le date non sono in ordine logico. DATE CANCELLATE";
+    final static String SCELTAELIMISCRIZIONE= "A quale evento vuoi cancellare la tua iscrizione?";
+    final static String ISCRIZIONIVUOTE= "Non sei Iscritto a nessun evento o � passata la data limite per il ritiro dell'iscrizione.";
+    final static String CANCELLAZIONIVUOTE= "Non hai creato nessun evento o � passata la data limite per il ritiro dell'evento.";
+    final static String SCELTAELIMINEVENTO= "Quale evento pubblicato vuoi cancellare?";
+    final static String EVENTICREATIVUOTI= "Non hai creato nessun evento a cui poter invitare i tuoi amici.";
+    final static String AMICIVUOTI= "Non ti � possibile invitare nessun utente";
+    final static String SCELTAINVITO= "Quale utente vuoi invitare?";
+
 	public static boolean richiestaInserimento(String nome){
 		boolean inserimento= false;
 		int ins = Utility.leggiIntero(0, 1, "Vuoi inserire " + nome + "? Digita 1 per SI e 0 pre NO");
@@ -96,7 +97,7 @@ public class InputOutput {
 	}
 
 	public static void visualizzaEventi(Utente utente){
-			System.out.println("0) Esci");	
+            stampaUscitaMenu();
             for(int i=0; i<utente.getEventiUtente().size();i++){
                 System.out.println(i+1 +")");
                 if (utente.getEventiUtente().get(i).getCategoria().getTitolo().getValore().getInserito()){
@@ -115,13 +116,38 @@ public class InputOutput {
         return numEvento;
     }
 
+    public static int sceltaInvitoEvento(ListaEventi bacheca) {
+        int numInvitoEvento = Utility.leggiIntero(0, bacheca.getElencoEventi().size() + 1, SCELTAINVITOEVENTO);
+        return numInvitoEvento;
+    }
+
     public static int sceltaInserimento(){
         int num = Utility.leggiIntero(0,1, "Vuoi inserire completare l'evento? Digita 1 per SI e 0 per NO");
         return num;
     }
 
+    public static int sceltaUtenteAmico(ArrayList<Utente> utentiInvitabili){
+        int numAmico = Utility.leggiIntero(0, utentiInvitabili.size()+1, SCELTAINVITO);
+        return numAmico;
+    }
+
+    public static int sceltaEliminaMessaggi(Utente utente){
+        int numMsg=Utility.leggiIntero(0, utente.getMessaggiUtente().size(), SCELTAMSG);
+        return numMsg;
+    }
+
+    public static int sceltaEliminaIscrizione(ListaEventi bacheca){
+        int numEliminIscrizione = Utility.leggiIntero(0, bacheca.getElencoEventi().size() + 1, SCELTAELIMISCRIZIONE);
+        return numEliminIscrizione;
+    }
+
+    public static int sceltaEliminaEvento(ListaEventi bacheca){
+        int numEliminEventoPubblicato = Utility.leggiIntero(0, bacheca.getElencoEventi().size() + 1, SCELTAELIMINEVENTO);
+        return numEliminEventoPubblicato;
+    }
+
     public static void visualizzaEventiBacheca(ListaEventi bacheca){
-    		System.out.println("0) Esci");
+            stampaUscitaMenu();
             for(int i=0; i<bacheca.getElencoEventi().size();i++){
                 System.out.println(i+1 +")");
                 System.out.println(NOMEEVENTO + bacheca.getElencoEventi().get(i).getCategoria().getTitolo().getValore().getValore());
@@ -137,5 +163,89 @@ public class InputOutput {
     	String info= new String("Nome: "+ nome +"\n" +"Descrizione: " + descrizione+ "\n"+ "Obbligatoria: " + obbligatorio +"\n");
     	System.out.println(info);
     }
+
+    public static void visualizzaMessaggiUtente(Utente utente){
+        for(int i=0; i<utente.getMessaggiUtente().size();i++){
+            System.out.println(i+1 +")");
+            System.out.println(utente.getMessaggiUtente().get(i).getTesto());
+        }
+    }
+    public static void visualizzaEventiUtente(ListaEventi bacheca, Utente utente){
+        stampaUscitaMenu();
+        for(int i=0; i<bacheca.getElencoEventi().size();i++){
+            if (utente.confrontaUtente(bacheca.getElencoEventi().get(i).getCreatore()) && bacheca.getElencoEventi().get(i).controlloDataEliminazione()){
+                System.out.println(i+1 +")");
+                System.out.println(NOMEEVENTO + bacheca.getElencoEventi().get(i).getCategoria().getTitolo().getValore().getValore());
+            }
+        }
+
+    }
+    public static void stampaIscrVuote(){
+        System.out.println(ISCRIZIONIVUOTE);
+    }
+
+
+    public static void stampaMsgEvento(){
+        System.out.println(MSGEVENTO);
+    }
+
+    public static void stampaAmiciVuoti(){
+        System.out.println(AMICIVUOTI);
+    }
+
+
+    public static void stampaEventiCreatiVuoti(){
+        System.out.println(EVENTICREATIVUOTI);
+    }
+
+
+    public static void stampaBenvenuto(){
+        System.out.println(MSGBENVENUTO);
+    }
+
+    public static void stampaEventiVuoti(){
+        System.out.println(EVENTIVUOTI);
+    }
+
+    public static void stampaEventiNonValidi(){
+        System.out.println(NONVALIDITAPUBBLICAZIONE);
+    }
+
+
+    public static void stampaMsgProbDate(){
+        System.out.println(MSGPROBDATE);
+    }
+
+    public static void stampaBachecaVuota(){
+        System.out.println(BACHECAVUOTA);
+    }
+
+    public static void stampaBachecaEventiValidiVuota(){
+        System.out.println(BACHECAEVENTIVUOTA);
+    }
+
+    public static void stampaMessaggiVuoti(){
+        System.out.println(MESSAGGIVUOTI);
+    }
+    public static String login(){
+        String utente = Utility.leggiStringa(MSGLOGIN);
+        return utente;
+    }
+
+    public static void stampaUscitaMenu(){
+        System.out.println("0) Esci");
+    }
+
+    public static void stampaCancellazioniVuote(){
+        System.out.println(CANCELLAZIONIVUOTE);
+    }
+    public static void  visualizzaUtentiInvitabili(ArrayList <Utente> utentiInvitabili){
+        stampaUscitaMenu();
+        for (int i=0; i<utentiInvitabili.size();i++){
+            System.out.println(i+1+")");
+            System.out.println("Nome Utente: " + utentiInvitabili.get(i).getNomeUtente());
+        }
+    }
+
 
 }

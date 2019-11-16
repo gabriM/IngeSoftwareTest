@@ -98,4 +98,45 @@ public class Messaggio implements Serializable{
 		}
 	}
 
+	public static void generaMessaggiCategoriaInteresse(ArrayList<Utente> elencoUtenti, Evento eventop){
+		String nomeCategoria=eventop.getCategoria().getNome();
+		String nomeEventop;
+		if (eventop.getCategoria().getTitolo().getValore().getInserito())
+			nomeEventop=(String) eventop.getCategoria().getTitolo().getValore().getValore();
+		else
+			nomeEventop="Titolo non ancora inserito";
+
+		for (int i=0; i<elencoUtenti.size(); i++){
+			for(int j=0;j<elencoUtenti.get(i).getCategorieInteresse().size();j++){
+				if(nomeCategoria.equalsIgnoreCase(elencoUtenti.get(i).getCategorieInteresse().get(j).getNome())){
+					String testo="L'utente " + eventop.getCreatore().getNomeUtente() + " ha pubblicato in bacheca un evento della categoria "+ nomeCategoria + " dal nome " + nomeEventop;
+					Messaggio msg=new Messaggio(elencoUtenti.get(i).getNomeUtente(),testo);
+					elencoUtenti.get(i).getMessaggiUtente().add(msg);
+				}
+			}
+		}
+	}
+
+	public static void generaMessaggiInvitoUtente(ArrayList<Utente> utentiInvitati, ArrayList<Utente> elencoUtenti, Utente utente, String nomeEventoi){
+		for (int i=0;i<utentiInvitati.size();i++){
+			for(int j=0; j<elencoUtenti.size();j++){
+				if(utentiInvitati.get(i).confrontaUtente(elencoUtenti.get(j))){
+					String testo="L'utente " + utente.getNomeUtente() + " ti ha invitato a partecipare all'evento " +  nomeEventoi;
+					Messaggio msg=new Messaggio(elencoUtenti.get(j).getNomeUtente(),testo);
+					elencoUtenti.get(j).getMessaggiUtente().add(msg);
+				}
+			}
+		}
+	}
+
+	public static void generaMessaggiStatoEvento(ArrayList<Utente> elencoUtenti, ArrayList<Messaggio> messaggiStato){
+		for(int i=0;i<messaggiStato.size();i++){
+			for(int j=0; j<elencoUtenti.size();j++){
+				if(messaggiStato.get(i).getDestinatario().equalsIgnoreCase(elencoUtenti.get(j).getNomeUtente())){
+					elencoUtenti.get(j).getMessaggiUtente().add(messaggiStato.get(i));
+				}
+			}
+		}
+	}
+
 }

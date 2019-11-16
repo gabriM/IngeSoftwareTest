@@ -95,31 +95,15 @@ public class Main {
 
 
 		/*Messaggio di benvenuto e richiesta nome per login*/
-		System.out.println(MSGBENVENUTO);
-		String utente= Utility.leggiStringa(MSGLOGIN);
-
+		InputOutput.stampaBenvenuto();
+		String utente= InputOutput.login();
 
 		/*Controllo se utente già esistente*/
-		Boolean esistente =false;
-		int numUtente=0;
-		for(int i=0; i<elencoUtenti.size();i++){
-			if (elencoUtenti.get(i).getNomeUtente().equalsIgnoreCase(utente)){
-				esistente =true;
-				numUtente=i;
-			}	
-		}
-		/*Se non esiste ne creo uno nuovo*/
-		if (!esistente){
-			Utente nuovoUtente= new Utente(utente);
-			elencoUtenti.add(nuovoUtente);
-			numUtente=elencoUtenti.size()-1;
-			elencoUtenti.get(numUtente).inserisciDatiPersonali(categorie);
-		}
+		int numUtente = Utente.controlloEsistenzaUtente(elencoUtenti, utente,categorie);
+
 		ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
-		
 		Utente utenteAttivo= elencoUtenti.get(numUtente);
-		
-		
+
 		/*Menu Scelta Opzioni*/
 		GUI myMenu= new GUI(NOMEMENU,OPZIONI);
 		int scelta;
@@ -131,24 +115,13 @@ public class Main {
 			/*Controlli su eventi in Bacheca e generazione di eventuali messaggi*/
 			
 			ArrayList<Messaggio> messaggiStato = new ArrayList<>(bacheca.controlloEventi());
-			for(int i=0;i<messaggiStato.size();i++){
-				for(int j=0; j<elencoUtenti.size();j++){
-					if(messaggiStato.get(i).getDestinatario().equalsIgnoreCase(elencoUtenti.get(j).getNomeUtente())){
-						elencoUtenti.get(j).getMessaggiUtente().add(messaggiStato.get(i));
-					}
-				}
-			}
+			Messaggio.generaMessaggiStatoEvento(elencoUtenti, messaggiStato);
 			
 			ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
 
 
 			/*Eliminazione eventi Falliti, Chiusi, Conclusi*/
-			for(int i=0; i< bacheca.getElencoEventi().size();i++){
-				if(!bacheca.getElencoEventi().get(i).getStato().equalsIgnoreCase("Aperta") ){
-					bacheca.getElencoEventi().remove(i);
-				}
-			}
-
+			bacheca.eliminaEventiStato();
 
 			ServizioFile.salvaSingoloOggetto(filebacheca, bacheca);
 			
@@ -174,7 +147,7 @@ public class Main {
                 eventoP.creaEvento(iscrizioneP);
                 utenteAttivo.getEventiUtente().add(eventoP);
                 				
-				System.out.println(MSGEVENTO);
+				InputOutput.stampaMsgEvento();
 
 				/*Salvataggio file*/
 				ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
@@ -182,16 +155,16 @@ public class Main {
 				
 			case 3:
 				/*Visualizza i miei eventi non pubblicati*/
-				 if(utenteAttivo.getEventiUtente().size()!=0){
+				 if(utenteAttivo.controlloEventiNonPubblicati()){
                      InputOutput.visualizzaEventi(elencoUtenti.get(numUtente));
                   }else {
-                      System.out.println(EVENTIVUOTI);
+                      InputOutput.stampaEventiVuoti();
                   }
 				break;
 			case 4:
 				/*Pubblica eventi*/
 				/*Visualizza i propri eventi non ancora inseriti*/
-				if(utenteAttivo.getEventiUtente().size()!=0){
+				if(utenteAttivo.controlloEventiNonPubblicati()){
 					InputOutput.visualizzaEventi(utenteAttivo);
 
 					/*Scelta evento da pubblicare*/
@@ -208,24 +181,8 @@ public class Main {
 								bacheca.getElencoEventi().add(eventop);
 								utenteAttivo.getEventiUtente().remove(numEventoPubblicato-1);
 
-								/*Messaggi ad utenti con categoria dinteresse uguale a quella dell'evento*/
-								String nomeCategoria=eventop.getCategoria().getNome();
-								String nomeEventop;
-								if (eventop.getCategoria().getTitolo().getValore().getInserito())
-									nomeEventop=(String) eventop.getCategoria().getTitolo().getValore().getValore();
-								else
-									nomeEventop="Titolo non ancora inserito";
-								
-								for (int i=0; i<elencoUtenti.size(); i++){
-									for(int j=0;j<elencoUtenti.get(i).getCategorieInteresse().size();j++){
-										if(nomeCategoria.equalsIgnoreCase(elencoUtenti.get(i).getCategorieInteresse().get(j).getNome())){
-											String testo="L'utente " + eventop.getCreatore().getNomeUtente() + " ha pubblicato in bacheca un evento della categoria "+ nomeCategoria + " dal nome " + nomeEventop;
-											Messaggio msg=new Messaggio(elencoUtenti.get(i).getNomeUtente(),testo);
-											elencoUtenti.get(i).getMessaggiUtente().add(msg);
-										}
-									}
-									
-								}
+								/*Messaggi ad utenti con categoria di interesse uguale a quella dell'evento*/
+								Messaggio.generaMessaggiCategoriaInteresse(elencoUtenti, eventop);
 
 							}
 							else{
@@ -233,15 +190,16 @@ public class Main {
 								elencoUtenti.get(numUtente).getEventiUtente().get(numEventoPubblicato -1).getCategoria().getDataFine().getValore().removeValore();
 								elencoUtenti.get(numUtente).getEventiUtente().get(numEventoPubblicato -1).getCategoria().getTermineIscrizione().getValore().removeValore();
 								elencoUtenti.get(numUtente).getEventiUtente().get(numEventoPubblicato -1).getCategoria().getDataRitiroIscrizione().getValore().removeValore();
-								System.out.println(MSGPROBDATE);
+								InputOutput.stampaMsgProbDate();
 								}		
 						}
 						else{
 							/*Evento non valido*/
-							System.out.println(NONVALIDITAPUBBLICAZIONE);
+							InputOutput.stampaEventiNonValidi();
 
 							/*Possibilità di inserire altri dettagli all'evento*/
-							int inserimento= Utility.leggiIntero(0,1, "Vuoi inserire completare l'evento? Digita 1 per SI e 0 pre NO");
+							int inserimento =InputOutput.sceltaInserimento();
+
 							if (inserimento==1){
 								eventop.inserisciDettagliEvento();
 							}					
@@ -249,7 +207,7 @@ public class Main {
 					}						
 				}
 				else {
-					System.out.println(EVENTIVUOTI);
+					InputOutput.stampaEventiVuoti();
 				}
 				
 				ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
@@ -257,10 +215,10 @@ public class Main {
 				break;
 			case 5:
 				/*Visualizza Bacheca*/
-				if(bacheca.getElencoEventi().size() != 0){
+				if(bacheca.controlloEventiBacheca()){
 					InputOutput.visualizzaEventiBacheca(bacheca);	
 				}else{
-					System.out.println(BACHECAVUOTA);
+					InputOutput.stampaBachecaVuota();
 				}	
 				break;
 				
@@ -270,6 +228,7 @@ public class Main {
 				ArrayList<Evento> listaEventiValidi=new ArrayList<>();
 				listaEventiValidi=bacheca.eventiValidi(utenteAttivo);
 				eventiValidi.setElencoEventi(listaEventiValidi);
+
 				if(listaEventiValidi.size()!=0){
 					/*Visualizzazione eventi presenti in bacheca*/
 					
@@ -279,10 +238,11 @@ public class Main {
 					
 					if (numIscEvento!=0){
 						Iscrizioni iscrizione=new Iscrizioni(elencoUtenti.get(numUtente).getNomeUtente(),bacheca.getElencoEventi().get(numIscEvento-1));
-						int costo=bacheca.getElencoEventi().get(numIscEvento-1).sceltaOpzioniGita();
+						int costo= bacheca.getElencoEventi().get(numIscEvento-1).sceltaOpzioniGita();
 						iscrizione.setCosto(costo);
 						bacheca.getElencoEventi().get(numIscEvento-1).getElencoIscritti().add(iscrizione);
-						String nomeCreatore=bacheca.getElencoEventi().get(numIscEvento-1).getCreatore().getNomeUtente();
+						String nomeCreatore = bacheca.getElencoEventi().get(numIscEvento-1).getCreatore().getNomeUtente();
+
 						for(int i=0; i<elencoUtenti.size();i++){
 							if (elencoUtenti.get(i).getNomeUtente().equalsIgnoreCase(nomeCreatore)){
 								elencoUtenti.get(i).getUtentiamici().add(elencoUtenti.get(numUtente));
@@ -291,11 +251,9 @@ public class Main {
 					}
 					
 				}else{
-					System.out.println(BACHECAEVENTIVUOTA);
+					InputOutput.stampaBachecaEventiValidiVuota();
 				}	
-				
-				
-				
+
 				ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
 				ServizioFile.salvaSingoloOggetto(filebacheca, bacheca);
 				
@@ -318,14 +276,11 @@ public class Main {
 							case 1:
 								/*Visualzza i miei messaggi*/
 								
-								if(elencoUtenti.get(numUtente).getMessaggiUtente().size()!=0){
+								if(elencoUtenti.get(numUtente).controlloPresenzaMessaggi()){
 									
-									for(int i=0; i<elencoUtenti.get(numUtente).getMessaggiUtente().size();i++){	
-										System.out.println(i+1 +")");
-										System.out.println(elencoUtenti.get(numUtente).getMessaggiUtente().get(i).getTesto());
-									}
+									InputOutput.visualizzaMessaggiUtente(elencoUtenti.get(numUtente));
 								}else {
-									System.out.println(MESSAGGIVUOTI);
+									InputOutput.stampaMessaggiVuoti();
 								}
 								break;
 							
@@ -333,24 +288,20 @@ public class Main {
 								/*Eliminazione messaggi*/
 
 								/*Visualizzazione dei miei messaggi*/
-								if(elencoUtenti.get(numUtente).getMessaggiUtente().size()!=0){
-									System.out.println("0) Esci");
-									for(int i=0; i<elencoUtenti.get(numUtente).getMessaggiUtente().size();i++){
-										System.out.println(i+1 +")");
-										System.out.println(elencoUtenti.get(numUtente).getMessaggiUtente().get(i).getTesto());
-									}
+								if(elencoUtenti.get(numUtente).controlloPresenzaMessaggi()){
+									InputOutput.stampaUscitaMenu();
+									InputOutput.visualizzaMessaggiUtente(elencoUtenti.get(numUtente));
 
 									/*Scelta messaggio da eliminare*/
-									int numMsg=Utility.leggiIntero(0, elencoUtenti.get(numUtente).getMessaggiUtente().size(), SCELTAMSG);
-									
-									
+									int numMsg= InputOutput.sceltaEliminaMessaggi(elencoUtenti.get(numUtente));
+
 									if(numMsg!=0){
 										elencoUtenti.get(numUtente).getMessaggiUtente().remove(numMsg-1);
 											
 										ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
 									}
 								}else {
-									System.out.println(MESSAGGIVUOTI);
+									InputOutput.stampaMessaggiVuoti();
 								}
 								break;
 							case 3:
@@ -366,31 +317,13 @@ public class Main {
 				case 8:
 
 					/*Elimina iscrizione a evento*/
-					boolean iscritto = false;
 
-					for (int i = 0; i < bacheca.getElencoEventi().size(); i++) {
-						if (bacheca.getElencoEventi().get(i).giaIscritto(elencoUtenti.get(numUtente)) && bacheca.getElencoEventi().get(i).controlloDataEliminazione()) {
-							iscritto = true;
-						}else{
-							iscritto = false;
-						}
+					if(bacheca.controlloIscrizione(elencoUtenti.get(numUtente))) {
 
-					}
-					if(iscritto) {
-
-							System.out.println("0) Esci");
-							for (int i = 0; i < bacheca.getElencoEventi().size(); i++) {
-								if (bacheca.getElencoEventi().get(i).giaIscritto(elencoUtenti.get(numUtente)) && bacheca.getElencoEventi().get(i).controlloDataEliminazione()) {
-									System.out.println(i + 1 + ")");
-									System.out.println(NOMEEVENTO + bacheca.getElencoEventi().get(i).getCategoria().getTitolo().getValore().getValore());
-									System.out.println(NOME + bacheca.getElencoEventi().get(i).getCategoria().getNome());
-									System.out.println(POSTILIBERI + bacheca.getElencoEventi().get(i).getPostiLiberi());
-								}
-
-							}
+							InputOutput.visualizzaEventiBacheca(bacheca);
 
 							/*Scelta eventi*/
-							int numEliminIscrizione = Utility.leggiIntero(0, bacheca.getElencoEventi().size() + 1, SCELTAELIMISCRIZIONE);
+							int numEliminIscrizione = InputOutput.sceltaEliminaIscrizione(bacheca);
 
 							if (numEliminIscrizione != 0) {
 								for (int j=0; j<bacheca.getElencoEventi().get(numEliminIscrizione - 1).getElencoIscritti().size();j++){
@@ -402,91 +335,51 @@ public class Main {
 							}
 
 					}else{
-						System.out.println(ISCRIZIONIVUOTE);
+						InputOutput.stampaIscrVuote();
 					}
 
 				break;
 
 				case 9:
 					/*Cancellazione Evento*/
-					Boolean eventiCancellabili=false;
 					
-					for(int i=0; i<bacheca.getElencoEventi().size();i++){
-						if (elencoUtenti.get(numUtente).confrontaUtente(bacheca.getElencoEventi().get(i).getCreatore()) && bacheca.getElencoEventi().get(i).controlloDataEliminazione()){
-							eventiCancellabili=true;
-						}
-					}
-					
-					if(eventiCancellabili){
-						System.out.println("0) Esci");
-						for(int i=0; i<bacheca.getElencoEventi().size();i++){
-							if (elencoUtenti.get(numUtente).confrontaUtente(bacheca.getElencoEventi().get(i).getCreatore()) && bacheca.getElencoEventi().get(i).controlloDataEliminazione()){
-								System.out.println(i+1 +")");
-								System.out.println(NOMEEVENTO + bacheca.getElencoEventi().get(i).getCategoria().getTitolo().getValore().getValore());
-							}
-						}
-						
-						int numEliminEventoPubblicato = Utility.leggiIntero(0, bacheca.getElencoEventi().size() + 1, SCELTAELIMINEVENTO);
+					if(bacheca.controlloEliminazioneEventi(elencoUtenti.get(numUtente))){
+						InputOutput.visualizzaEventiUtente(bacheca, elencoUtenti.get(numUtente));
+
+						int numEliminEventoPubblicato = InputOutput.sceltaEliminaEvento(bacheca);
 						
 						if (numEliminEventoPubblicato != 0) {
 							bacheca.getElencoEventi().get(numEliminEventoPubblicato -1).setStato("Annullato");
 						}
 					}
 					else{
-						System.out.println(CANCELLAZIONIVUOTE);
+						InputOutput.stampaCancellazioniVuote();
 					}
 					
 					break;
 					
 				case 10:
 					/*invita persone ad evento*/
-					
-					Boolean eventiPubblicati=false;
-					
-					for(int i=0; i<bacheca.getElencoEventi().size();i++){
-						if (elencoUtenti.get(numUtente).confrontaUtente(bacheca.getElencoEventi().get(i).getCreatore())){
-							eventiPubblicati=true;
-						}
-					}
-					
-					if(eventiPubblicati){
-						System.out.println("0) Esci");
-						for(int i=0; i<bacheca.getElencoEventi().size();i++){
-							if (elencoUtenti.get(numUtente).confrontaUtente(bacheca.getElencoEventi().get(i).getCreatore())){
-								System.out.println(i+1 +")");
-								System.out.println(NOMEEVENTO + bacheca.getElencoEventi().get(i).getCategoria().getTitolo().getValore().getValore());
-							}
-						}
+
+					if(bacheca.controlloEventiPubblicati(elencoUtenti.get(numUtente))){
+						InputOutput.visualizzaEventiUtente(bacheca, elencoUtenti.get(numUtente));
 						
-						int numInvitoEvento = Utility.leggiIntero(0, bacheca.getElencoEventi().size() + 1, SCELTAINVITOEVENTO);
+						int numInvitoEvento = InputOutput.sceltaInvitoEvento(bacheca);
 						
 						if (numInvitoEvento != 0) {
 							/*scelta amici da invitare*/
 							ArrayList<Utente> utentiInvitabili=new ArrayList<>();
 							ArrayList<Utente> utentiInvitati=new ArrayList<>();
 							
-							for(int i=0; i<elencoUtenti.get(numUtente).getUtentiamici().size();i++){
-								boolean giaIscrittoEv=false;
-								for (int j=0; j<bacheca.getElencoEventi().get(numInvitoEvento-1).getElencoIscritti().size();j++){
-									if(elencoUtenti.get(numUtente).getUtentiamici().get(i).confrontaUtenteStringa(bacheca.getElencoEventi().get(numInvitoEvento-1).getElencoIscritti().get(j).getUtente())){
-											giaIscrittoEv=true;
-									}
-								}
-								if(!giaIscrittoEv)
-									utentiInvitabili.add(elencoUtenti.get(numUtente).getUtentiamici().get(i));
-							}
+							bacheca.aggiungiUtentiInvitabili(elencoUtenti.get(numUtente), utentiInvitabili, numInvitoEvento);
 
 							int numAmico=0;
 							if(utentiInvitabili.size()!=0){
 								
 								do{
-									System.out.println("0) Esci");
-									for (int i=0; i<utentiInvitabili.size();i++){
-										System.out.println(i+1+")");
-										System.out.println("Nome Utente: " + utentiInvitabili.get(i).getNomeUtente());
-									}
+									InputOutput.visualizzaUtentiInvitabili(utentiInvitabili);
 									
-									numAmico=Utility.leggiIntero(0, utentiInvitabili.size()+1, SCELTAINVITO);
+									numAmico= InputOutput.sceltaUtenteAmico(utentiInvitabili);
 									if(numAmico!=0){
 										utentiInvitati.add(utentiInvitabili.get(numAmico-1));
 										utentiInvitabili.remove(numAmico-1);
@@ -502,27 +395,16 @@ public class Main {
 									nomeEventoi="Titolo non ancora inserito";
 								
 								
-								for (int i=0;i<utentiInvitati.size();i++){
-									for(int j=0; j<elencoUtenti.size();j++){
-										if(utentiInvitati.get(i).confrontaUtente(elencoUtenti.get(j))){
-											String testo="L'utente " + elencoUtenti.get(numUtente).getNomeUtente() + " ti ha invitato a partecipare all'evento " +  nomeEventoi;
-											Messaggio msg=new Messaggio(elencoUtenti.get(j).getNomeUtente(),testo);
-											elencoUtenti.get(j).getMessaggiUtente().add(msg);
-										}
-									}
-								}
-								
-								
-								
+								Messaggio.generaMessaggiInvitoUtente(utentiInvitati, elencoUtenti, elencoUtenti.get(numUtente),nomeEventoi);
 							}
 							else{
-								System.out.println(AMICIVUOTI);
+								InputOutput.stampaAmiciVuoti();
 							}
 							
 						}
 					}
 					else{
-						System.out.println(EVENTICREATIVUOTI);
+						InputOutput.stampaEventiCreatiVuoti();
 					}
 					
 					break;
