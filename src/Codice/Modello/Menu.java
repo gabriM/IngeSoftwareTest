@@ -64,7 +64,7 @@ public class Menu {
 
 
 
-    public static void loginMenu(){
+    public static void loginMenu() throws Exception{
 
         InputOutput.stampaBenvenuto();
         String utente= InputOutput.login();
@@ -168,9 +168,7 @@ public class Menu {
                                 InputOutput.stampaEventiNonValidi();
 
                                 /*Possibilità di inserire altri dettagli all'evento*/
-                                int inserimento =InputOutput.sceltaInserimento();
-
-                                if (inserimento==1){
+                                if (InputOutput.sceltaInserimento()==1){
                                     eventop.inserisciDettagliEvento();
                                 }
                             }
