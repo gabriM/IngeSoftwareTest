@@ -2,6 +2,9 @@ package MyLib;
 import java.io.*;
 import java.util.ArrayList;
 
+import Codice.Modello.ListaEventi;
+import Codice.Modello.Utente;
+
 public class ServizioFile{
 	private final static String MSG_NO_FILE = "ATTENZIONE: NON TROVO IL FILE ";
 	private final static String MSG_NO_LETTURA = "ATTENZIONE: PROBLEMI CON LA LETTURA DEL FILE ";
@@ -71,6 +74,11 @@ public class ServizioFile{
 			}
 		} // finally
 	} // metodo salvaSingoloOggetto
+	
+	
+
+	
+	
 	
 	/**
 	 * Crea un file nell'indirizzo passato
@@ -161,7 +169,7 @@ public class ServizioFile{
 	    if (!success)
 	      throw new IllegalArgumentException("Cancellazione fallita");
 	  }
-
+	
 
 	
 

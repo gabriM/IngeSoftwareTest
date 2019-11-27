@@ -1,8 +1,9 @@
 package Codice.Modello;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class CategoriaA {
+public abstract class CategoriaA implements Serializable{
 	final String NOME = "Nome categoria: ";
 	final String STATO = "Stato: ";
 	final String POSTILIBERI = "Posti liberi: ";

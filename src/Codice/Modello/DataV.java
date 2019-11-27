@@ -1,10 +1,11 @@
 package Codice.Modello;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import Codice.Vista.InputOutput;
 
-public class DataV extends ValoreA{
+public class DataV extends ValoreA implements Serializable{
 	public Date valore;
 	
 	public DataV(){

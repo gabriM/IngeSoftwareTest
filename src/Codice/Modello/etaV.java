@@ -1,8 +1,10 @@
 package Codice.Modello;
 
+import java.io.Serializable;
+
 import Codice.Vista.InputOutput;
 
-public class etaV extends ValoreA{
+public class etaV extends ValoreA implements Serializable{
 	public int valore[];
 	
 	

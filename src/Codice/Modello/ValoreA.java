@@ -1,6 +1,8 @@
 package Codice.Modello;
 
-public abstract class ValoreA {
+import java.io.Serializable;
+
+public abstract class ValoreA implements Serializable{
 	
 	protected Boolean inserito;
 	

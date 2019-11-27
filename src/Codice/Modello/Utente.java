@@ -255,23 +255,13 @@ public class Utente implements Serializable{
 			return false;
 	}
 
-	public static int controlloEsistenzaUtente(ArrayList<Utente> elencoUtenti, String utente, ArrayList<CategoriaA> categorie){
-		Boolean esistente =false;
-		int numUtente=0;
-		for(int i=0; i<elencoUtenti.size();i++){
-			if (elencoUtenti.get(i).getNomeUtente().equalsIgnoreCase(utente)){
-				esistente =true;
-				numUtente=i;
-			}
-		}
-		/*Se non esiste ne creo uno nuovo*/
-		if (!esistente){
-			Utente nuovoUtente= new Utente(utente);
-			elencoUtenti.add(nuovoUtente);
-			numUtente=elencoUtenti.size()-1;
-			elencoUtenti.get(numUtente).inserisciDatiPersonali(categorie);
-		}
-		return numUtente;
+	public void removeDate(int n) {
+		eventiUtente.get(n).getCategoria().getData().getValore().removeValore();
+        eventiUtente.get(n).getCategoria().getDataFine().getValore().removeValore();
+        eventiUtente.get(n).getCategoria().getTermineIscrizione().getValore().removeValore();
+        eventiUtente.get(n).getCategoria().getDataRitiroIscrizione().getValore().removeValore();
 	}
+
+	
 
 }

@@ -1,8 +1,10 @@
 package Codice.Modello;
 
+import java.io.Serializable;
+
 import Codice.Vista.InputOutput;
 
-public class testoV extends ValoreA{
+public class testoV extends ValoreA implements Serializable{
 	
 	public String valore;
 	

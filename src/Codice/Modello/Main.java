@@ -6,10 +6,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+
+import Codice.Controller.Controller;
 import Codice.Vista.*;
 import MyLib.ServizioFile;
 import MyLib.Utility;
-// Prova gabri nuova
 /**
  * Classe che definisce il Main del programma.
  *
@@ -24,9 +25,8 @@ public class Main {
 	 *
 	 */
 	public static void main(String[] args) throws Exception{
-		Menu.startMenu();
-		Menu.salvaFile();
-		Menu.loginMenu();
+		Controller c = new Controller();
+		c.run();
 	}
 
 

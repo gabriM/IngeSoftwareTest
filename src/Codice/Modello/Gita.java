@@ -1,5 +1,6 @@
 package Codice.Modello;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import MyLib.Utility;
@@ -19,7 +20,7 @@ import MyLib.Utility;
  *
  * @version 5.0 1 Febbraio 2019
  */
-public class Gita extends CategoriaA {
+public class Gita extends CategoriaA implements Serializable{
 	private Campo costoPasti=new Campo("Costo pasti","Indica il costo se si vuole usufruire dei pasti forniti dall'organizzazione",true,new interoV());
 	private Campo mezzoTrasporto=new Campo("Mezzo di trasporto","Indica il mezzo di trasporto con cui si raggiungerà il luogo di destinazione",true,new testoV());
 	private Campo costoTrasporto=new Campo("Costo del trasporto","Indica il prezzo da pagare se si vuole usufruire del trasporto fornito dall'organizazione",true,new interoV());

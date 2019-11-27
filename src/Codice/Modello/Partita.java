@@ -1,5 +1,6 @@
 package Codice.Modello;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +21,7 @@ import MyLib.Utility;
  *
  * @version 5.0 1 Febbraio 2019
  */
-public class Partita extends CategoriaA {
+public class Partita extends CategoriaA implements Serializable{
 	
 	final String NOME = "Partita di Calcio";
 	final String DESCRIZIONE = "Evento sportivo che prevede un match di 90 minuti";

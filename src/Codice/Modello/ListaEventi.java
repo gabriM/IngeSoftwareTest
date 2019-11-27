@@ -130,18 +130,6 @@ public class ListaEventi implements Serializable {
 		return eventiPubblicati;
 	}
 
-	public void aggiungiUtentiInvitabili(Utente utente, ArrayList<Utente> utentiInvitabili, int numInvitoEvento){
-		for(int i=0; i<utente.getUtentiamici().size();i++){
-			boolean giaIscrittoEv=false;
-			for (int j=0; j<elencoEventi.get(numInvitoEvento-1).getElencoIscritti().size();j++){
-				if(utente.getUtentiamici().get(i).confrontaUtenteStringa(elencoEventi.get(numInvitoEvento-1).getElencoIscritti().get(j).getUtente())){
-					giaIscrittoEv=true;
-				}
-			}
-			if(!giaIscrittoEv)
-				utentiInvitabili.add(utente.getUtentiamici().get(i));
-		}
-	}
 
 	public void eliminaEventiStato(){
 		for(int i=0; i< elencoEventi.size();i++){
@@ -149,5 +137,41 @@ public class ListaEventi implements Serializable {
 				elencoEventi.remove(i);
 			}
 		}
+	}
+
+	public void addIscrizione(Evento evento, Iscrizioni iscrizione) {
+		for(int i=0;i<elencoEventi.size();i++){
+			if(evento.isEqual(elencoEventi.get(i)))
+				elencoEventi.get(i).getElencoIscritti().add(iscrizione);
+		}
+		
+	}
+
+	public ArrayList<Evento> eventiIscritto(Utente utente) {
+		ArrayList<Evento> eventiIscritto=new ArrayList<>();
+		for (int i = 0; i < elencoEventi.size(); i++) {
+			if (elencoEventi.get(i).giaIscritto(utente) && elencoEventi.get(i).controlloDataEliminazione()){
+				eventiIscritto.add(elencoEventi.get(i));
+			}
+		}
+		return eventiIscritto;
+	}
+
+	public ArrayList<Evento> eventiCreati(Utente utente) {
+		ArrayList<Evento> eventiCreati=new ArrayList<>();
+		for(int i=0; i<elencoEventi.size();i++){
+			if (utente.confrontaUtente(elencoEventi.get(i).getCreatore()) && elencoEventi.get(i).controlloDataEliminazione()){
+				eventiCreati.add(elencoEventi.get(i));
+			}
+		}
+		return eventiCreati;
+	}
+
+	public void eliminaEvento(Evento evento) {
+		for(int i=0;i<elencoEventi.size();i++){
+			if(evento.isEqual(elencoEventi.get(i)))
+				elencoEventi.get(i).setStato("Annullato");
+		}
+		
 	}
 }

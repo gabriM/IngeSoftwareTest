@@ -436,6 +436,43 @@ public class Evento implements Serializable{
 		
 	}
 
+	public boolean isEqual(Evento evento) {
+		if(evento.getCreatore().getNomeUtente().equalsIgnoreCase(creatore.getNomeUtente())){
+			if(evento.getCategoria().getNome().equalsIgnoreCase(categoria.getNome())){
+				String nome1=(String) evento.getCategoria().getTitolo().getValore().getValore();
+				String nome2=(String) categoria.getTitolo().getValore().getValore();
+				if(nome1.equalsIgnoreCase(nome2))
+					return true;
+			}
+		}
+			return false;
+	}
+
+	public void eliminaIscrizione(Utente utenteAttivo) {
+		for(int i=0;i<elencoIscritti.size();i++){
+			if(elencoIscritti.get(i).getUtente().equalsIgnoreCase(utenteAttivo.getNomeUtente())){
+				elencoIscritti.remove(i);
+			}
+		}
+		
+	}
+
+	public ArrayList<Utente> UtentiInvitabili(Utente utente) {
+		
+		ArrayList<Utente> utentiInvitabili=new ArrayList<>();
+		for(int i=0; i<utente.getUtentiamici().size();i++){
+			boolean giaIscrittoEv=false;
+			for (int j=0; j<elencoIscritti.size();j++){
+				if(utente.getUtentiamici().get(i).confrontaUtenteStringa(elencoIscritti.get(j).getUtente())){
+					giaIscrittoEv=true;
+				}
+			}
+			if(!giaIscrittoEv)
+				utentiInvitabili.add(utente.getUtentiamici().get(i));
+		}
+		return utentiInvitabili;
+	}
+
 
 
 }
