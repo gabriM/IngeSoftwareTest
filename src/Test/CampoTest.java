@@ -10,7 +10,8 @@ public class CampoTest {
 
 	@Test
 	public void testVisualizzaCampo() {
-		Campo c=new Campo("Prova", "Descrizione test",true,1);
+		testoV testo =new testoV();
+		Campo c=new Campo("Prova", "Descrizione test",true,testo);
 		String s="Nome: Prova"+"\n" +"Descrizione: Descrizione test" + "\n"+ "Obbligatoria: true"  +"\n";
 		assertEquals(s,c.visualizzaCampo());
 		

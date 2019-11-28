@@ -54,6 +54,10 @@ public class Evento implements Serializable{
 		stato= "Aperta";
 	}
 
+	public Evento() {
+		
+	}
+
 	/*Getters*/
 	/**
 	 * Ritorna la categoria dell'evento

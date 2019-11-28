@@ -4,17 +4,18 @@ import java.io.Serializable;
 
 import Codice.Vista.InputOutput;
 
-public class interoV extends ValoreA implements Serializable{
-	public int valore;
+public class EtaV extends ValoreA implements Serializable{
+	public int valore[];
 	
-	public interoV(){
+	
+	public EtaV(){
 		inserito=false;
 	}
 	
 	
 	@Override
 	public void setValore(Object valore) {
-			this.valore=(int) valore;
+			this.valore=(int[]) valore;
 	}
 	@Override
 	public Object getValore() {
@@ -24,8 +25,8 @@ public class interoV extends ValoreA implements Serializable{
 
 
 	@Override
-	public void inserisciValore(String nome) {
-		setValore(InputOutput.inserimentoInt(nome));
+	public void inserisciValore(String nome) throws Exception {
+		setValore(InputOutput.inserimentoEta(nome));
 		
 	}
 }

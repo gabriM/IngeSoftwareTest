@@ -42,21 +42,21 @@ public class Campo implements Serializable{
 	 *
 	 * @author Gabriele Manenti
 	 */
-	public Campo(String _nome, String _descrizione, Boolean _obbligatorio, testoV testo){
+	public Campo(String _nome, String _descrizione, Boolean _obbligatorio, TestoV testo){
 		nome =_nome;
 		descrizione= _descrizione;
 		obbligatorio = _obbligatorio;
 		valore=testo;
 
 	}
-	public Campo(String _nome, String _descrizione, Boolean _obbligatorio,interoV intero){
+	public Campo(String _nome, String _descrizione, Boolean _obbligatorio,InteroV intero){
 		nome =_nome;
 		descrizione= _descrizione;
 		obbligatorio = _obbligatorio;
 		valore=intero;
 	}
 	
-	public Campo(String _nome, String _descrizione, Boolean _obbligatorio,etaV eta){
+	public Campo(String _nome, String _descrizione, Boolean _obbligatorio,EtaV eta){
 		nome =_nome;
 		descrizione= _descrizione;
 		obbligatorio = _obbligatorio;

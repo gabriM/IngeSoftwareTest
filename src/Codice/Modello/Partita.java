@@ -30,8 +30,8 @@ public class Partita extends CategoriaA implements Serializable{
 	
 
 	/*Attributi*/
-	private Campo genere=new Campo("Genere","Indica se i partecipanti sono maschi o femmine",true,new testoV());
-	private Campo fasciaEta=new Campo("Fascia di età","Indica l'età massima e minima per partecipare all'evento",true,new etaV());
+	private Campo genere=new Campo("Genere","Indica se i partecipanti sono maschi o femmine",true,new TestoV());
+	private Campo fasciaEta=new Campo("Fascia di età","Indica l'età massima e minima per partecipare all'evento",true,new EtaV());
 	private ArrayList<Campo> elencoCampi = new ArrayList<>();
 
 	/*Costruttori*/

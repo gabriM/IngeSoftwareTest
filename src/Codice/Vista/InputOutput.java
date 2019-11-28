@@ -145,7 +145,12 @@ public class InputOutput {
         int numEliminEventoPubblicato = Utility.leggiIntero(0, bacheca.getElencoEventi().size() + 1, SCELTAELIMINEVENTO);
         return numEliminEventoPubblicato;
     }
-
+    
+    public static int selezioneEvento(ArrayList<Evento> elencoEventi){
+        int numEliminEventoPubblicato = Utility.leggiIntero(0,elencoEventi.size() + 1, SCELTAEVENTO);
+        return numEliminEventoPubblicato;
+    }
+    
     public static void visualizzaEventiBacheca(ListaEventi bacheca){
             stampaUscitaMenu();
             for(int i=0; i<bacheca.getElencoEventi().size();i++){
@@ -158,6 +163,19 @@ public class InputOutput {
 
         
     }
+    
+    public static void visualizzaListaEventi(ArrayList<Evento> elencoEventi){
+        stampaUscitaMenu();
+        for(int i=0; i<elencoEventi.size();i++){
+            System.out.println(i+1 +")");
+            System.out.println(NOMEEVENTO + elencoEventi.get(i).getCategoria().getTitolo().getValore().getValore());
+            System.out.println(NOME +elencoEventi.get(i).getCategoria().getNome());
+            System.out.println(STATO + elencoEventi.get(i).getStato());
+            System.out.println(POSTILIBERI + elencoEventi.get(i).getPostiLiberi());
+        }
+
+    
+}
     
     public static void stampaCampo(String nome, String descrizione, Boolean obbligatorio){
     	String info= new String("Nome: "+ nome +"\n" +"Descrizione: " + descrizione+ "\n"+ "Obbligatoria: " + obbligatorio +"\n");

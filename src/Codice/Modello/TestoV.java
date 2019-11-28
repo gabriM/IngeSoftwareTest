@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 import Codice.Vista.InputOutput;
 
-public class testoV extends ValoreA implements Serializable{
+public class TestoV extends ValoreA implements Serializable{
 	
 	public String valore;
 	
 	
-	public testoV(){
+	public TestoV(){
 		inserito=false;
 	}
 	
