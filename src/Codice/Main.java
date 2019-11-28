@@ -1,4 +1,4 @@
-package Codice.Modello;
+package Codice;
 
 import java.io.*;
 import java.text.DateFormat;

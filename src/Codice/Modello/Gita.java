@@ -3,6 +3,7 @@ package Codice.Modello;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import Codice.Vista.InputOutput;
 import MyLib.Utility;
 
 /**
@@ -159,22 +160,7 @@ public class Gita extends CategoriaA implements Serializable{
 	 */
 	 public int sceltaOpzioni() {
 			int costo=(int) getQuotaIndividuale().getValore().getValore();
-			int inserimento1= Utility.leggiIntero(0,1, "Vuoi usufruire dei pasti forniti dall'organizzazione? (Costo "+ (int) costoPasti.getValore().getValore() +" Euro) Digita 1 per SI e 0 pre NO");
-			if(inserimento1==0){
-			
-			}
-			else{
-				costo=costo + (int) costoPasti.getValore().getValore();
-			}
-			
-			
-			int inserimento2= Utility.leggiIntero(0,1, "Vuoi usufruire del trasporto fornito dall'organizzazione? (Costo "+ (int) costoTrasporto.getValore().getValore() +" Euro) Digita 1 per SI e 0 pre NO");
-			if(inserimento2==0){
-				
-			}
-			else{
-				costo=costo + (int) costoTrasporto.getValore().getValore();
-			}
+			costo=InputOutput.sceltaOpzioniGita(costo,(int) costoPasti.getValore().getValore(), (int) costoTrasporto.getValore().getValore());
 			return costo;
 		}
 

@@ -112,7 +112,7 @@ public class InputOutput {
     }
 
     public static int sceltaEvento(int max) {
-        int numEvento = Utility.leggiIntero(1, max + 1, SCELTAEVENTO);
+        int numEvento = Utility.leggiIntero(0, max + 1, SCELTAEVENTO);
         return numEvento;
     }
 
@@ -264,6 +264,25 @@ public class InputOutput {
             System.out.println("Nome Utente: " + utentiInvitabili.get(i).getNomeUtente());
         }
     }
+	public static int sceltaOpzioniGita(int costo, int pasti, int trasporti) {
+		int inserimento1= Utility.leggiIntero(0,1, "Vuoi usufruire dei pasti forniti dall'organizzazione? (Costo "+ pasti +" Euro) Digita 1 per SI e 0 pre NO");
+		if(inserimento1==0){
+		
+		}
+		else{
+			costo=costo + pasti;
+		}
+		
+		
+		int inserimento2= Utility.leggiIntero(0,1, "Vuoi usufruire del trasporto fornito dall'organizzazione? (Costo "+ trasporti +" Euro) Digita 1 per SI e 0 pre NO");
+		if(inserimento2==0){
+			
+		}
+		else{
+			costo=costo + trasporti;
+		}
+		return 0;
+	}
 
 
 }

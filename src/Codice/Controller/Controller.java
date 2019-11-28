@@ -359,12 +359,12 @@ public class Controller implements Serializable{
 	        if (ServizioFile.esistenzaFile(fileutenti) == 0) {
 	            ServizioFile.salvaSingoloOggetto(fileutenti, elencoUtenti);
 	        } else{
-	            //elencoUtenti=  (ArrayList<Utente>) ServizioFile.caricaSingoloOggetto(fileutenti);
+	            elencoUtenti=  (ArrayList<Utente>) ServizioFile.caricaSingoloOggetto(fileutenti);
 	        }
 	        if (ServizioFile.esistenzaFile(filebacheca) == 0) {
 	            ServizioFile.salvaSingoloOggetto(filebacheca, bacheca);
 	        }else{
-	            //bacheca= (ListaEventi) ServizioFile.caricaSingoloOggetto(filebacheca);
+	            bacheca= (ListaEventi) ServizioFile.caricaSingoloOggetto(filebacheca);
 	        }
 	}
 }

@@ -30,7 +30,6 @@ public class EventoTest {
 	Utente u = new Utente("Prova");
 	Evento e = new Evento(p,u);
 	
-	e.inserisciValoriPredefinitiEvento();
 	
 	e.isValido();
 	boolean validita = e.getvalidita();
@@ -49,7 +48,7 @@ public class EventoTest {
 	e.getCategoria().getData().getValore().setValore("15/10/2019");
 	e.getCategoria().getOra().getValore().setValore("10:10");
 	e.getCategoria().getQuotaIndividuale().getValore().setValore(15);
-	e.getCategoria().inserisciValoriPredefiniti();
+	
 	
 	e.isValido();
 	boolean validita = e.getvalidita();

@@ -15,6 +15,12 @@ public class GitaTest {
 		assertEquals(17,c.getElencoCampi().size());
 	}
 	
+	@Test
+	public void testSceltaOpzioni() {
+		Gita c= new Gita();
+		c.getQuotaIndividuale().getValore().setValore(10);
+		assertEquals(10,c.sceltaOpzioni());
+	}
 	
 	
 }

@@ -8,16 +8,10 @@ import Codice.Modello.*;
 
 public class CategoriaTest {
 
-	@Test
-	public void testCreaArray() {
-		Categoria c= new Categoria("Prova","Prova pe test");
-		c.creaArray();
-		assertEquals(14,c.getElencoCampi().size());
-	}
-	
+
 	@Test
 	public void testGetPartecipantiMaxConTolleranza() {
-		Categoria c= new Categoria("Prova","Prova pe test");
+		CategoriaA c= new Partita();
 		c.getnPartecipanti().getValore().setValore(10);
 		c.getTolleranzaPartecipanti().getValore().setValore(5);
 		assertEquals(15,c.getPartecipantiMax());
@@ -25,14 +19,14 @@ public class CategoriaTest {
 	
 	@Test
 	public void testGetPartecipantiMaxNoTolleranza() {
-		Categoria c= new Categoria("Prova","Prova pe test");
+		CategoriaA c= new Partita();
 		c.getnPartecipanti().getValore().setValore(10);
 		assertEquals(10,c.getPartecipantiMax());
 	}
 	
 	@Test
 	public void testGetPartecipantiMinConTolleranza() {
-		Categoria c= new Categoria("Prova","Prova pe test");
+		CategoriaA c= new Partita();
 		c.getnPartecipanti().getValore().setValore(10);
 		c.getTolleranzaPartecipanti().getValore().setValore(5);
 		assertEquals(5,c.getPartecipantiMin());
@@ -40,17 +34,11 @@ public class CategoriaTest {
 	
 	@Test
 	public void testGetPartecipantiMinNoTolleranza() {
-		Categoria c= new Categoria("Prova","Prova pe test");
+		CategoriaA c= new Partita();
 		c.getnPartecipanti().getValore().setValore(10);
 		assertEquals(10,c.getPartecipantiMin());
 	}
 	
-	@Test
-	public void testSceltaOpzioni() {
-		Categoria c= new Categoria("Prova","Prova pe test");
-		c.getQuotaIndividuale().getValore().setValore(10);
-		assertEquals(10,c.sceltaOpzioni());
-	}
 	
 	
 }
