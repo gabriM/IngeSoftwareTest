@@ -16,6 +16,7 @@ public class EtaV extends ValoreA implements Serializable{
 	@Override
 	public void setValore(Object valore) {
 			this.valore=(int[]) valore;
+			inserito=true;
 	}
 	@Override
 	public Object getValore() {

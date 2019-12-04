@@ -226,6 +226,7 @@ public class Controller implements Serializable{
 
             if (numIscEvento!=0){
                 Iscrizioni iscrizione=new Iscrizioni(utenteAttivo.getNomeUtente(),listaEventiValidi.get(numIscEvento-1));
+                
                 int costo= listaEventiValidi.get(numIscEvento-1).sceltaOpzioniGita();
                 iscrizione.setCosto(costo);
                 bacheca.addIscrizione(listaEventiValidi.get(numIscEvento-1),iscrizione);

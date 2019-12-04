@@ -15,6 +15,7 @@ public class DataV extends ValoreA implements Serializable{
 	@Override
 	public void setValore(Object valore) {
 			this.valore=(Date) valore;
+			inserito=true;
 	}
 	@Override
 	public Object getValore() {

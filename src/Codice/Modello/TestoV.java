@@ -18,6 +18,7 @@ public class TestoV extends ValoreA implements Serializable{
 	@Override
 	public void setValore(Object valore) {
 			this.valore=(String) valore;
+			inserito=true;
 	}
 
 	@Override

@@ -186,6 +186,18 @@ public class Gita extends CategoriaA implements Serializable{
 		elencoCampi.add(mezzoTrasporto);
 		elencoCampi.add(costoTrasporto);
 		
+	}
+
+	@Override
+	public Campo getFasciaEta() {
+		
+		return null;
+	}
+
+	@Override
+	public Campo getGenere() {
+		
+		return null;
 	} 
 
 }

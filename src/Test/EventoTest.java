@@ -7,70 +7,64 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.xml.crypto.Data;
+
 import Codice.Modello.*;
 import org.junit.Test;
 
 public class EventoTest {
 
 	@Test
-	public void testValiditaFalse()
-	{
-	Partita p = new Partita();
-	Utente u = new Utente("Prova");
-	Evento e = new Evento(p,u);
-	e.isValido();
-	boolean validita = e.getvalidita();
-	assertFalse(validita);
+	public void testValiditaFalse(){
+		Partita p = new Partita();
+		Utente u = new Utente("Prova");
+		Evento e = new Evento(p,u);
+		e.isValido();
+		boolean validita = e.getvalidita();
+		assertFalse(validita);
 	}
-	
+
 	@Test
-	public void testValiditaTrueAll() throws Exception
-	{
-	Partita p = new Partita();
-	Utente u = new Utente("Prova");
-	Evento e = new Evento(p,u);
-	
-	
-	e.isValido();
-	boolean validita = e.getvalidita();
-	assertTrue(validita);
-	}
-	
-	@Test
-	public void testValiditaTrueNeeded() 
-	{
-	Partita p = new Partita();
-	Utente u = new Utente("Prova");
-	Evento e = new Evento(p,u);
-	e.getCategoria().getnPartecipanti().getValore().setValore(10);	
-	e.getCategoria().getTermineIscrizione().getValore().setValore("10/10/2019");
-	e.getCategoria().getLuogo().getValore().setValore("Brescia");
-	e.getCategoria().getData().getValore().setValore("15/10/2019");
-	e.getCategoria().getOra().getValore().setValore("10:10");
-	e.getCategoria().getQuotaIndividuale().getValore().setValore(15);
-	
-	
-	e.isValido();
-	boolean validita = e.getvalidita();
-	assertTrue(validita);
+	public void testValiditaTrueNeeded(){
+		Partita p = new Partita();
+		Utente u = new Utente("Prova");
+		Evento e = new Evento(p,u);
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date("10/10/2020");
+		int[] eta=new int[]{10,20};
+		e.getCategoria().getnPartecipanti().getValore().setValore(10);	
+		e.getCategoria().getTermineIscrizione().getValore().setValore(date);
+		e.getCategoria().getLuogo().getValore().setValore("Brescia");
+		e.getCategoria().getData().getValore().setValore(date);
+		e.getCategoria().getOra().getValore().setValore("10:10");
+		e.getCategoria().getQuotaIndividuale().getValore().setValore(15);
+		e.getCategoria().getGenere().getValore().setValore("M");
+		e.getCategoria().getFasciaEta().getValore().setValore(eta);
+		
+		
+		e.isValido();
+		boolean validita = e.getvalidita();
+		assertTrue(validita);
 	}
 	
 	
 	@Test
 	public void testValiditaFalseNotAll() 
 	{
-	Partita p = new Partita();
-	Utente u = new Utente("Prova");
-	Evento e = new Evento(p,u);
-	e.getCategoria().getnPartecipanti().getValore().setValore(10);	
-	e.getCategoria().getTermineIscrizione().getValore().setValore("10/10/2019");
-	e.getCategoria().getLuogo().getValore().setValore("Brescia");
-	e.getCategoria().getData().getValore().setValore("15/10/2019");
-
+		Partita p = new Partita();
+		Utente u = new Utente("Prova");
+		Evento e = new Evento(p,u);
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date("10/10/2020");
+		e.getCategoria().getnPartecipanti().getValore().setValore(10);	
+		e.getCategoria().getTermineIscrizione().getValore().setValore(date);
+		e.getCategoria().getLuogo().getValore().setValore("Brescia");
+		e.getCategoria().getData().getValore().setValore(date);
 	
-	e.isValido();
-	boolean validita = e.getvalidita();
-	assertFalse(validita);
+		
+		e.isValido();
+		boolean validita = e.getvalidita();
+		assertFalse(validita);
 	}
 	
 	

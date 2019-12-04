@@ -164,5 +164,23 @@ public class Partita extends CategoriaA implements Serializable{
 		return (int) getQuotaIndividuale().getValore().getValore();
 	}
 
+	@Override
+	public Campo getCostoPasti() {
+		
+		return null;
+	}
+
+	@Override
+	public Campo getCostoTrasporto() {
+		
+		return null;
+	}
+
+	@Override
+	public Campo getMezzoTrasporto() {
+		
+		return null;
+	}
+
 }
 

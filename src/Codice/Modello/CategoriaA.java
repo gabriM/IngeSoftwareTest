@@ -36,6 +36,11 @@ public abstract class CategoriaA implements Serializable{
 	public abstract void inserisciCampi() throws Exception;
 	public abstract void visualizzaCampi();
 	public abstract int sceltaOpzioni();
+	public abstract Campo getFasciaEta();
+	public abstract Campo getGenere();
+	public abstract Campo getCostoPasti();
+	public abstract Campo getCostoTrasporto();
+	public abstract Campo getMezzoTrasporto();
 	
 	
 	public CategoriaA(String _nome, String _descrizione) {
