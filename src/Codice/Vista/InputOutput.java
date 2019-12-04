@@ -84,6 +84,7 @@ public class InputOutput {
 	}
 
 	public static void visualizzaCategorie(ArrayList<CategoriaA> categorie1){
+		stampaUscitaMenu();
 		for(int i=0; i<categorie1.size();i++){
 			System.out.println(i+1+")");
 			System.out.println(NOME + categorie1.get(i).getNome());
@@ -282,6 +283,20 @@ public class InputOutput {
 			costo=costo + trasporti;
 		}
 		return 0;
+	}
+	public static boolean richiestaInserimentoCategoriePreferite() {
+		int inserimento= Utility.leggiIntero(0,1, "Vuoi modificare l'elenco delle tue categorie preferite? Digita 1 per SI e 0 pre NO");
+		if (inserimento==1)
+			return true;
+		else 
+			return false;
+	}
+	public static boolean richiestaInserimentoFasciaEta() {
+		int inserimento= Utility.leggiIntero(0,1, "Vuoi inserire la tua fascia di età? Digita 1 per SI e 0 per NO");
+		if (inserimento==1)
+			return true;
+		else 
+			return false;
 	}
 
 

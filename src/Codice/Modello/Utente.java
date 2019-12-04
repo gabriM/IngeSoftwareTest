@@ -3,6 +3,7 @@ package Codice.Modello;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import Codice.Vista.InputOutput;
 import MyLib.Utility;
 
 /**
@@ -202,50 +203,40 @@ public class Utente implements Serializable{
 	 * @author Matteo Gusmini
 	 */
 	public void inserisciDatiPersonali(ArrayList<CategoriaA> categorie){
-		int inserimento= Utility.leggiIntero(0,1, "Vuoi modificare l'elenco delle tue categorie preferite? Digita 1 per SI e 0 pre NO");
-
-		if(inserimento==0){
-
+		if(InputOutput.richiestaInserimentoCategoriePreferite()){
+			addCategorieInteresse(categorie);
 		}
-		else{
-			ArrayList<CategoriaA> nuoveCategorie= new ArrayList<>();
-			ArrayList<CategoriaA> sceltaCategorie= new ArrayList<>();
-			sceltaCategorie= (ArrayList<CategoriaA>) categorie.clone();
-			int numCat=0;
-			do{
-				System.out.println("0) Esci");
-				for (int i=0; i<sceltaCategorie.size();i++){
-					System.out.println(i+1+")");
-					System.out.println(NOME + sceltaCategorie.get(i).getNome());
-					System.out.println(DESCRIZIONE + sceltaCategorie.get(i).getDescrizione()+"\n");
-				}
-
-				numCat=Utility.leggiIntero(0, sceltaCategorie.size()+1, SCELTACATEGORIA);
-				if(numCat!=0){
-					nuoveCategorie.add(sceltaCategorie.get(numCat-1));
-					sceltaCategorie.remove(numCat-1);
-				}
-
-			}while(sceltaCategorie.size()>0 && numCat!=0);
-			categorieInteresse=nuoveCategorie;
+			
+		if(InputOutput.richiestaInserimentoFasciaEta()){
+			fasciaEta= InputOutput.inserimentoEta("Fascia D'Et‡");
 		}
 
-		int inserimento2= Utility.leggiIntero(0,1, "Vuoi inserire la tua fascia di et√†? Digita 1 per SI e 0 per NO");
-		if(inserimento2==0){
+	}
+
+	private void addCategorieInteresse(ArrayList<CategoriaA> categorie) {
+		ArrayList<CategoriaA> nuoveCategorie= new ArrayList<>();
+		ArrayList<CategoriaA> sceltaCategorie= new ArrayList<>();
+		sceltaCategorie= (ArrayList<CategoriaA>) categorie.clone();
+		int numCat=0;
+		do{
+			InputOutput.visualizzaCategorie(sceltaCategorie);
+			numCat=InputOutput.sceltaCategoria(sceltaCategorie.size());
+			if(numCat!=0){
+				nuoveCategorie.add(sceltaCategorie.get(numCat-1));
+				sceltaCategorie.remove(numCat-1);
 			}
-		else{
-			fasciaEta= Utility.leggiFasciaEta("Seleziona la tua fascia d'eta");
-		}
 
-		}
+		}while(sceltaCategorie.size()>0 && numCat!=0);
+		categorieInteresse=nuoveCategorie;	
+		
+	}
 
-		public boolean controlloEventiNonPubblicati(){
-
+	public boolean controlloEventiNonPubblicati(){
 		if(eventiUtente.size()!=0)
 			return true;
 		else
 			return false;
-		}
+	}
 
 	public boolean controlloPresenzaMessaggi(){
 
